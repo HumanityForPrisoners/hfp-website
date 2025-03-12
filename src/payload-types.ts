@@ -71,6 +71,7 @@ export interface Config {
     media: Media;
     categories: Category;
     users: User;
+    services: Service;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -87,6 +88,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
+    services: ServicesSelect<false> | ServicesSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -102,10 +104,12 @@ export interface Config {
   globals: {
     header: Header;
     footer: Footer;
+    servicesHero: ServicesHero;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
+    servicesHero: ServicesHeroSelect<false> | ServicesHeroSelect<true>;
   };
   locale: null;
   user: User & {
@@ -190,7 +194,17 @@ export interface Page {
       | null;
     media?: (string | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
+  layout: (
+    | CallToActionBlock
+    | ContentBlock
+    | MediaBlock
+    | ArchiveBlock
+    | FormBlock
+    | HeroStatsBlock
+    | AboutUsBlock
+    | FeaturedServicesBlock
+    | ImpactBlock
+  )[];
   meta?: {
     title?: string | null;
     /**
@@ -727,6 +741,224 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroStatsBlock".
+ */
+export interface HeroStatsBlock {
+  Stats?:
+    | {
+        mainStat: string;
+        subtitle: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'heroStats';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AboutUsBlock".
+ */
+export interface AboutUsBlock {
+  leftSide: {
+    pageHeading: {
+      preHeader: string;
+      header: string;
+      description: string;
+      direction: 'left' | 'center';
+    };
+    values?:
+      | {
+          icon:
+            | 'handshake'
+            | 'accessibilityNew'
+            | 'hearing'
+            | 'assistWalker'
+            | 'info'
+            | 'privacyTip'
+            | 'help'
+            | 'questionMark'
+            | 'volunteerActivism';
+          valueTitle: string;
+          valueDescription: string;
+          id?: string | null;
+        }[]
+      | null;
+    ctaButton: {
+      type?: ('reference' | 'custom') | null;
+      newTab?: boolean | null;
+      reference?:
+        | ({
+            relationTo: 'pages';
+            value: string | Page;
+          } | null)
+        | ({
+            relationTo: 'posts';
+            value: string | Post;
+          } | null);
+      url?: string | null;
+      label: string;
+    };
+  };
+  rightSide: {
+    topImage: string | Media;
+    bottomImage: string | Media;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'aboutUsBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeaturedServicesBlock".
+ */
+export interface FeaturedServicesBlock {
+  pageHeading: {
+    preHeader: string;
+    header: string;
+    description: string;
+    direction: 'left' | 'center';
+  };
+  services: (string | Service)[];
+  ctaButton: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: string | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: string | Post;
+        } | null);
+    url?: string | null;
+    label: string;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'featuredServicesBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services".
+ */
+export interface Service {
+  id: string;
+  title?: string | null;
+  hero: {
+    type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
+    richText?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    links?:
+      | {
+          link: {
+            type?: ('reference' | 'custom') | null;
+            newTab?: boolean | null;
+            reference?:
+              | ({
+                  relationTo: 'pages';
+                  value: string | Page;
+                } | null)
+              | ({
+                  relationTo: 'posts';
+                  value: string | Post;
+                } | null);
+            url?: string | null;
+            label: string;
+            /**
+             * Choose how the link should be rendered.
+             */
+            appearance?: ('default' | 'outline') | null;
+          };
+          id?: string | null;
+        }[]
+      | null;
+    media?: (string | null) | Media;
+  };
+  content: {
+    image: string | Media;
+    /**
+     * Short description to be shown in feature blocks.
+     */
+    shortDescription: string;
+    description: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+  };
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImpactBlock".
+ */
+export interface ImpactBlock {
+  leftSide: {
+    image: string | Media;
+    statistic: {
+      mainStat: string;
+      subtitle: string;
+    };
+  };
+  rightSide: {
+    pageHeading: {
+      preHeader: string;
+      header: string;
+      description: string;
+      direction: 'left' | 'center';
+    };
+    progressBar?:
+      | {
+          name: string;
+          progress: number;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'impactBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -918,6 +1150,10 @@ export interface PayloadLockedDocument {
         value: string | User;
       } | null)
     | ({
+        relationTo: 'services';
+        value: string | Service;
+      } | null)
+    | ({
         relationTo: 'redirects';
         value: string | Redirect;
       } | null)
@@ -1015,6 +1251,10 @@ export interface PagesSelect<T extends boolean = true> {
         mediaBlock?: T | MediaBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
+        heroStats?: T | HeroStatsBlockSelect<T>;
+        aboutUsBlock?: T | AboutUsBlockSelect<T>;
+        featuredServicesBlock?: T | FeaturedServicesBlockSelect<T>;
+        impactBlock?: T | ImpactBlockSelect<T>;
       };
   meta?:
     | T
@@ -1111,6 +1351,128 @@ export interface FormBlockSelect<T extends boolean = true> {
   form?: T;
   enableIntro?: T;
   introContent?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroStatsBlock_select".
+ */
+export interface HeroStatsBlockSelect<T extends boolean = true> {
+  Stats?:
+    | T
+    | {
+        mainStat?: T;
+        subtitle?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AboutUsBlock_select".
+ */
+export interface AboutUsBlockSelect<T extends boolean = true> {
+  leftSide?:
+    | T
+    | {
+        pageHeading?:
+          | T
+          | {
+              preHeader?: T;
+              header?: T;
+              description?: T;
+              direction?: T;
+            };
+        values?:
+          | T
+          | {
+              icon?: T;
+              valueTitle?: T;
+              valueDescription?: T;
+              id?: T;
+            };
+        ctaButton?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
+      };
+  rightSide?:
+    | T
+    | {
+        topImage?: T;
+        bottomImage?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeaturedServicesBlock_select".
+ */
+export interface FeaturedServicesBlockSelect<T extends boolean = true> {
+  pageHeading?:
+    | T
+    | {
+        preHeader?: T;
+        header?: T;
+        description?: T;
+        direction?: T;
+      };
+  services?: T;
+  ctaButton?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        label?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImpactBlock_select".
+ */
+export interface ImpactBlockSelect<T extends boolean = true> {
+  leftSide?:
+    | T
+    | {
+        image?: T;
+        statistic?:
+          | T
+          | {
+              mainStat?: T;
+              subtitle?: T;
+            };
+      };
+  rightSide?:
+    | T
+    | {
+        pageHeading?:
+          | T
+          | {
+              preHeader?: T;
+              header?: T;
+              description?: T;
+              direction?: T;
+            };
+        progressBar?:
+          | T
+          | {
+              name?: T;
+              progress?: T;
+              id?: T;
+            };
+      };
   id?: T;
   blockName?: T;
 }
@@ -1273,6 +1635,55 @@ export interface UsersSelect<T extends boolean = true> {
   hash?: T;
   loginAttempts?: T;
   lockUntil?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services_select".
+ */
+export interface ServicesSelect<T extends boolean = true> {
+  title?: T;
+  hero?:
+    | T
+    | {
+        type?: T;
+        richText?: T;
+        links?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                    appearance?: T;
+                  };
+              id?: T;
+            };
+        media?: T;
+      };
+  content?:
+    | T
+    | {
+        image?: T;
+        shortDescription?: T;
+        description?: T;
+      };
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1553,6 +1964,55 @@ export interface Header {
         id?: string | null;
       }[]
     | null;
+  Logo?: (string | null) | Media;
+  ctaButton?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: string | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  socialLinks?:
+    | {
+        socialLink?: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: string | Post;
+              } | null);
+          url?: string | null;
+        };
+        icon: 'facebook' | 'x' | 'instagram' | 'youtube' | 'linkedin';
+        id?: string | null;
+      }[]
+    | null;
+  contactLinks?:
+    | {
+        type: 'phone' | 'mail';
+        emailSelect?: string | null;
+        phoneSelect?: number | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1587,6 +2047,64 @@ export interface Footer {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "servicesHero".
+ */
+export interface ServicesHero {
+  id: string;
+  hero: {
+    type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
+    richText?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    links?:
+      | {
+          link: {
+            type?: ('reference' | 'custom') | null;
+            newTab?: boolean | null;
+            reference?:
+              | ({
+                  relationTo: 'pages';
+                  value: string | Page;
+                } | null)
+              | ({
+                  relationTo: 'posts';
+                  value: string | Post;
+                } | null);
+            url?: string | null;
+            label: string;
+            /**
+             * Choose how the link should be rendered.
+             */
+            appearance?: ('default' | 'outline') | null;
+          };
+          id?: string | null;
+        }[]
+      | null;
+    media?: (string | null) | Media;
+  };
+  pageHeading: {
+    preHeader: string;
+    header: string;
+    description: string;
+    direction: 'left' | 'center';
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -1602,6 +2120,43 @@ export interface HeaderSelect<T extends boolean = true> {
               url?: T;
               label?: T;
             };
+        id?: T;
+      };
+  Logo?: T;
+  ctaButton?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
+        id?: T;
+      };
+  socialLinks?:
+    | T
+    | {
+        socialLink?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+            };
+        icon?: T;
+        id?: T;
+      };
+  contactLinks?:
+    | T
+    | {
+        type?: T;
+        emailSelect?: T;
+        phoneSelect?: T;
         id?: T;
       };
   updatedAt?: T;
@@ -1633,6 +2188,45 @@ export interface FooterSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "servicesHero_select".
+ */
+export interface ServicesHeroSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        type?: T;
+        richText?: T;
+        links?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                    appearance?: T;
+                  };
+              id?: T;
+            };
+        media?: T;
+      };
+  pageHeading?:
+    | T
+    | {
+        preHeader?: T;
+        header?: T;
+        description?: T;
+        direction?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "TaskSchedulePublish".
  */
 export interface TaskSchedulePublish {
@@ -1647,6 +2241,10 @@ export interface TaskSchedulePublish {
       | ({
           relationTo: 'posts';
           value: string | Post;
+        } | null)
+      | ({
+          relationTo: 'services';
+          value: string | Service;
         } | null);
     global?: string | null;
     user?: (string | null) | User;

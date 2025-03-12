@@ -51,6 +51,7 @@ const config = {
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
       borderRadius: {
+        DEFAULT: 'var(--radius)',
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
@@ -94,8 +95,14 @@ const config = {
         warning: 'hsl(var(--warning))',
       },
       fontFamily: {
-        mono: ['var(--font-geist-mono)'],
-        sans: ['var(--font-geist-sans)'],
+        mono: ['var(--font-pt-serif)'],
+        sans: ['var(--font-open-sans)'],
+      },
+      gap: {
+        30: '1.875rem',
+      },
+      gridTemplateColumns: {
+        '12-90': 'repeat(12, minmax(0, 5.265rem))',
       },
       keyframes: {
         'accordion-down': {
@@ -111,39 +118,54 @@ const config = {
         DEFAULT: {
           css: [
             {
-              '--tw-prose-body': 'var(--text)',
-              '--tw-prose-headings': 'var(--text)',
               h1: {
-                fontWeight: 'normal',
+                fontSize: '3rem',
+                fontFamily: 'var(--font-pt-serif)',
+                fontWeight: '400',
+                lineHeight: '1.3',
                 marginBottom: '0.25em',
               },
-            },
-          ],
-        },
-        base: {
-          css: [
-            {
-              h1: {
-                fontSize: '2.5rem',
-              },
               h2: {
-                fontSize: '1.25rem',
-                fontWeight: 600,
+                fontSize: '3rem',
+                fontFamily: 'var(--font-pt-serif)',
+                fontWeight: '400',
+                lineHeight: '1.3',
+              },
+              h3: {
+                fontSize: '2.2rem',
+                fontFamily: 'var(--font-pt-serif)',
+                fontWeight: '400',
+                lineHeight: '1.3',
+              },
+              h4: {
+                fontSize: '1.3rem',
+                fontFamily: 'var(--font-pt-serif)',
+                fontWeight: '400',
+                lineHeight: '1.3',
+              },
+              h5: {
+                fontSize: '1.3rem',
+                fontFamily: 'var(--font-pt-serif)',
+                fontWeight: '400',
+                lineHeight: '1.3',
+              },
+              h6: {
+                fontSize: '1.1rem',
+                fontFamily: 'var(--font-pt-serif)',
+                fontWeight: '400',
+                lineHeight: '1.3',
+              },
+              p: {
+                fontFamily: 'var(--font-open-sans)',
+                fontWeight: '400',
+                fontSize: '0.9rem',
+                lineHeight: '1.4',
               },
             },
           ],
         },
         md: {
-          css: [
-            {
-              h1: {
-                fontSize: '3.5rem',
-              },
-              h2: {
-                fontSize: '1.5rem',
-              },
-            },
-          ],
+          css: [{}],
         },
       }),
     },
