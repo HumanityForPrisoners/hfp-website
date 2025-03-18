@@ -15,6 +15,10 @@ export const Logo = (props: Props) => {
   const loading = loadingFromProps || 'lazy'
   const priority = priorityFromProps || 'low'
 
+  if (!props.logo?.url) {
+    return null
+  }
+
   return (
     /* eslint-disable @next/next/no-img-element */
     <img
@@ -23,7 +27,7 @@ export const Logo = (props: Props) => {
       fetchPriority={priority}
       decoding="async"
       className={clsx('max-w-[9.375rem] w-fit h-fit', className)}
-      src={props.logo?.url || ''}
+      src={props.logo.url}
     />
   )
 }

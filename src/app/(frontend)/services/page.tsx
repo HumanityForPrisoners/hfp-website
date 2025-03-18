@@ -11,6 +11,7 @@ import React from 'react'
 import PageClient from './page.client'
 import { getCachedGlobal } from '@/utilities/getGlobals'
 import { ServicesHero } from '@/payload-types'
+import { MainGrid } from '@/components/MainGrid'
 
 export const dynamic = 'force-static'
 export const revalidate = 600
@@ -45,7 +46,9 @@ export default async function Page() {
     <div className="pt-24 pb-24">
       <PageClient />
       <RenderHero {...heroData} />
-      <PageHeading {...headingData} />
+      <MainGrid className="pb-4">
+        <PageHeading className="col-span-6" {...headingData} />
+      </MainGrid>
 
       <div className="container mt-8">
         <PageRange

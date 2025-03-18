@@ -13,7 +13,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
   return (
     <div
       className="relative -mt-[7.4rem] pt-20 flex items-center justify-center text-white"
-      data-theme={headerTheme}
+      data-theme={headerTheme || 'light'}
     >
       <div className="mx-auto grid-cols-12-90 gap-30 grid pb-24">
         <div className="md:text-left col-start-7 col-span-full">
