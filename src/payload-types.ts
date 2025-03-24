@@ -204,6 +204,9 @@ export interface Page {
     | AboutUsBlock
     | FeaturedServicesBlock
     | ImpactBlock
+    | TestimonialBlock
+    | LogoCarousel
+    | FeaturedPostsBlock
   )[];
   meta?: {
     title?: string | null;
@@ -227,21 +230,26 @@ export interface Page {
 export interface Post {
   id: string;
   title: string;
-  heroImage?: (string | null) | Media;
+  hero?: {
+    heroImage?: (string | null) | Media;
+  };
   content: {
-    root: {
-      type: string;
-      children: {
+    image: string | Media;
+    description: {
+      root: {
         type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
         version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
+      };
+      [k: string]: unknown;
     };
-    [k: string]: unknown;
   };
   relatedPosts?: (string | Post)[] | null;
   categories?: (string | Category)[] | null;
@@ -403,45 +411,27 @@ export interface User {
  * via the `definition` "CallToActionBlock".
  */
 export interface CallToActionBlock {
-  richText?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
+  backgroundImage: string | Media;
+  content: {
+    preHeader: string;
+    heading: string;
+    description: string;
+    ctaButton: {
+      type?: ('reference' | 'custom') | null;
+      newTab?: boolean | null;
+      reference?:
+        | ({
+            relationTo: 'pages';
+            value: string | Page;
+          } | null)
+        | ({
+            relationTo: 'posts';
+            value: string | Post;
+          } | null);
+      url?: string | null;
+      label: string;
     };
-    [k: string]: unknown;
-  } | null;
-  links?:
-    | {
-        link: {
-          type?: ('reference' | 'custom') | null;
-          newTab?: boolean | null;
-          reference?:
-            | ({
-                relationTo: 'pages';
-                value: string | Page;
-              } | null)
-            | ({
-                relationTo: 'posts';
-                value: string | Post;
-              } | null);
-          url?: string | null;
-          label: string;
-          /**
-           * Choose how the link should be rendered.
-           */
-          appearance?: ('default' | 'outline') | null;
-        };
-        id?: string | null;
-      }[]
-    | null;
+  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'cta';
@@ -959,6 +949,71 @@ export interface ImpactBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TestimonialBlock".
+ */
+export interface TestimonialBlock {
+  video: {
+    video: string;
+  };
+  content: {
+    preHeading: string;
+    heading: string;
+    testimonialContent: {
+      profilePic: string | Media;
+      fullName: string;
+      testimonial: string;
+    };
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testimonialBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LogoCarousel".
+ */
+export interface LogoCarousel {
+  logos: {
+    logo: string | Media;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'logoCarousel';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "featuredPostsBlock".
+ */
+export interface FeaturedPostsBlock {
+  pageHeading: {
+    preHeader: string;
+    header: string;
+    description: string;
+    direction: 'left' | 'center';
+  };
+  posts: (string | Post)[];
+  ctaButton: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: string | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: string | Post;
+        } | null);
+    url?: string | null;
+    label: string;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'featuredPostsBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1255,6 +1310,9 @@ export interface PagesSelect<T extends boolean = true> {
         aboutUsBlock?: T | AboutUsBlockSelect<T>;
         featuredServicesBlock?: T | FeaturedServicesBlockSelect<T>;
         impactBlock?: T | ImpactBlockSelect<T>;
+        testimonialBlock?: T | TestimonialBlockSelect<T>;
+        logoCarousel?: T | LogoCarouselSelect<T>;
+        featuredPostsBlock?: T | FeaturedPostsBlockSelect<T>;
       };
   meta?:
     | T
@@ -1275,11 +1333,14 @@ export interface PagesSelect<T extends boolean = true> {
  * via the `definition` "CallToActionBlock_select".
  */
 export interface CallToActionBlockSelect<T extends boolean = true> {
-  richText?: T;
-  links?:
+  backgroundImage?: T;
+  content?:
     | T
     | {
-        link?:
+        preHeader?: T;
+        heading?: T;
+        description?: T;
+        ctaButton?:
           | T
           | {
               type?: T;
@@ -1287,9 +1348,7 @@ export interface CallToActionBlockSelect<T extends boolean = true> {
               reference?: T;
               url?: T;
               label?: T;
-              appearance?: T;
             };
-        id?: T;
       };
   id?: T;
   blockName?: T;
@@ -1478,12 +1537,87 @@ export interface ImpactBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TestimonialBlock_select".
+ */
+export interface TestimonialBlockSelect<T extends boolean = true> {
+  video?:
+    | T
+    | {
+        video?: T;
+      };
+  content?:
+    | T
+    | {
+        preHeading?: T;
+        heading?: T;
+        testimonialContent?:
+          | T
+          | {
+              profilePic?: T;
+              fullName?: T;
+              testimonial?: T;
+            };
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LogoCarousel_select".
+ */
+export interface LogoCarouselSelect<T extends boolean = true> {
+  logos?:
+    | T
+    | {
+        logo?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "featuredPostsBlock_select".
+ */
+export interface FeaturedPostsBlockSelect<T extends boolean = true> {
+  pageHeading?:
+    | T
+    | {
+        preHeader?: T;
+        header?: T;
+        description?: T;
+        direction?: T;
+      };
+  posts?: T;
+  ctaButton?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        label?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "posts_select".
  */
 export interface PostsSelect<T extends boolean = true> {
   title?: T;
-  heroImage?: T;
-  content?: T;
+  hero?:
+    | T
+    | {
+        heroImage?: T;
+      };
+  content?:
+    | T
+    | {
+        image?: T;
+        description?: T;
+      };
   relatedPosts?: T;
   categories?: T;
   meta?:

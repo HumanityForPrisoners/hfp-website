@@ -17,7 +17,9 @@ export const MediumImpactHero: React.FC<Page['hero']> = ({ media, richText }) =>
         <div className="md:text-center">
           {richText && (
             <RichText
-              className="mb-6 prose-h2:text-primary prose-h6:text-secondary"
+              className="mb-6 prose-h2:text-primary 
+              prose-h2:font-normal
+              prose-h6:text-secondary"
               data={richText}
               enableGutter={false}
             />

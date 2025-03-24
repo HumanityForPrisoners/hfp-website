@@ -26,6 +26,7 @@ import {
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 import { slugField } from '@/fields/slug'
+import { link } from '@/fields/link'
 
 export const Posts: CollectionConfig<'posts'> = {
   slug: 'posts',
@@ -42,6 +43,7 @@ export const Posts: CollectionConfig<'posts'> = {
     title: true,
     slug: true,
     categories: true,
+    content: true,
     meta: {
       image: true,
       description: true,
@@ -78,20 +80,37 @@ export const Posts: CollectionConfig<'posts'> = {
       type: 'tabs',
       tabs: [
         {
+          name: 'hero',
+          label: 'Hero',
           fields: [
             {
               name: 'heroImage',
               type: 'upload',
               relationTo: 'media',
             },
+          ],
+        },
+        {
+          name: 'content',
+          label: 'Content',
+          fields: [
             {
-              name: 'content',
+              name: 'image',
+              type: 'upload',
+              relationTo: 'media',
+              label: 'Service Image',
+              required: true,
+            },
+            {
+              name: 'description',
+              label: 'Long Description',
               type: 'richText',
+              required: true,
               editor: lexicalEditor({
                 features: ({ rootFeatures }) => {
                   return [
                     ...rootFeatures,
-                    HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
+                    HeadingFeature({ enabledHeadingSizes: ['h5'] }),
                     BlocksFeature({ blocks: [Banner, Code, MediaBlock] }),
                     FixedToolbarFeature(),
                     InlineToolbarFeature(),
@@ -99,11 +118,8 @@ export const Posts: CollectionConfig<'posts'> = {
                   ]
                 },
               }),
-              label: false,
-              required: true,
             },
           ],
-          label: 'Content',
         },
         {
           fields: [

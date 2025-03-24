@@ -16,6 +16,7 @@ export const ServiceCard: React.FC<Props> = (props) => {
           className="rounded-3xl"
           imgClassName="rounded-3xl w-full h-full"
           resource={reference.content.image}
+          loading="lazy"
         />
         <div className="bg-secondary w-[92%] h-40 absolute z-10 -bottom-12 left-0 px-6 py-4 rounded-bl-3xl">
           <div className="flex flex-col gap-3 text-primary">

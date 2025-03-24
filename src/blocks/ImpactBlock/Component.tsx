@@ -16,6 +16,7 @@ export const ImpactBlock: React.FC<ImpactBlockProps> = ({ leftSide, rightSide })
             imgClassName="rounded-3xl h-[42rem] object-cover"
             className="w-[34rem]"
             resource={leftSide.image}
+            loading="lazy"
           />
         </div>
       </div>

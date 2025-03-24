@@ -59,13 +59,15 @@ export const AboutUsBlock: React.FC<AboutUsBlockProps> = ({ leftSide, rightSide 
       <div className="col-span-6 relative flex flex-col items-center">
         <Media
           imgClassName="rounded-full rounded-tr-none h-64 w-auto"
-          className="col-span-4 col-start-9 z-11 w-fit -mb-3 pl-56"
+          className="z-11 w-fit -mb-3 pl-56"
           resource={rightSide.topImage}
+          loading="lazy"
         />
         <Media
           imgClassName="rounded-full rounded-tl-none h-64 w-auto"
-          className="col-span-4 col-start-7 z-10 w-fit -mt-3 pr-56"
+          className="z-10 w-fit -mt-3 pr-56"
           resource={rightSide.bottomImage}
+          loading="lazy"
         />
         <Image
           src={Rectangle}
