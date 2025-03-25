@@ -63,11 +63,6 @@ export default buildConfig({
     ...plugins,
     // storage-adapter-placeholder
   ],
-  upload: {
-    limits: {
-      fileSize: 10000000,
-    },
-  },
   secret: process.env.PAYLOAD_SECRET,
   sharp,
   typescript: {

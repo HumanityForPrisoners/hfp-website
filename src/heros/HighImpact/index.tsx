@@ -1,48 +1,48 @@
 'use client'
-import { useHeaderTheme } from '@/providers/HeaderTheme'
-
 import type { Page } from '@/payload-types'
-
 import { CMSLink } from '@/components/Link'
 import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
 
 export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText }) => {
-  const { headerTheme } = useHeaderTheme()
-
   return (
     <div
-      className="relative -mt-[7.4rem] pt-20 flex items-center justify-center text-white"
-      data-theme={headerTheme || 'light'}
+      className="relative -mt-[7.4rem] pt-20 flex items-center justify-center text-white min-h-[80vh]"
+      data-theme="light"
     >
-      <div className="mx-auto grid-cols-12-90 gap-30 grid pb-24">
-        <div className="md:text-left col-start-7 col-span-full"> 
+      {/* Media as Background */}
+      {media && typeof media === 'object' && (
+        <Media
+          fill
+          imgClassName="-z-10 object-cover"
+          videoClassName="-z-10 absolute inset-0 w-full h-full object-cover"
+          priority
+          resource={media}
+        />
+      )}
+      <div className="absolute inset-0 bg-black bg-opacity-50 z-0"></div>
+      {/* Text Content Overlay */}
+      <div className="mx-auto grid-cols-12-90 gap-30 grid pb-24 z-10">
+        <div className="md:text-left col-start-7 col-span-full">
           {richText && (
             <RichText
               className="mb-6 prose-h1:text-primary 
               prose-p:text-primary
-              prose-h6:text-secondary"
+              prose-h6:text-secondary drop-shadow-xl"
               data={richText}
               enableGutter={false}
             />
           )}
           {Array.isArray(links) && links.length > 0 && (
             <ul className="flex gap-4">
-              {links.map(({ link }, i) => {
-                return (
-                  <li key={i}>
-                    <CMSLink {...link} size={'lg'} />
-                  </li>
-                )
-              })}
+              {links.map(({ link }, i) => (
+                <li key={i}>
+                  <CMSLink {...link} size={'lg'} />
+                </li>
+              ))}
             </ul>
           )}
         </div>
-      </div>
-      <div className="min-h-[80vh] select-none">
-        {media && typeof media === 'object' && (
-          <Media fill imgClassName="-z-10 object-cover" priority resource={media} />
-        )}
       </div>
     </div>
   )
