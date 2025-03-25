@@ -1,5 +1,4 @@
 import React from 'react'
-import '@animxyz/core'
 
 import type { HeroStatsBlock as HeroStatBlockProps } from '@/payload-types'
 

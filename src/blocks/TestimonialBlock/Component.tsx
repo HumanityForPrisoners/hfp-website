@@ -11,13 +11,13 @@ export const TestimonialBlock: React.FC<TestimonialBlockProps> = ({ video, conte
   return (
     <MainGrid>
       <iframe
-        className="-z-10 col-span-6 col-start-1 rounded-[7rem] rounded-tl-none w-full h-96 row-start-1"
+        className="z-8 cursor-pointer col-span-6 col-start-1 rounded-[7rem] rounded-tl-none w-full h-96 row-start-1"
         src={video.video}
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; web-share"
         referrerPolicy="strict-origin-when-cross-origin"
       />
-      <div className="rounded-[7rem] z-11 rounded-tr-none h-96 bg-primary flex flex-col justify-center shadow-md col-span-6 col-start-6 mt-32 gap-6 row-start-1 p-16">
+      <div className="rounded-[7rem] z-11 rounded-tr-none h-96 bg-primary flex flex-col justify-center shadow-md col-span-7 col-start-6 mt-44 gap-6 row-start-1 p-16">
         <h6 className="text-secondary">{preHeading}</h6>
         <h3 className="text-ring">{heading}</h3>
         <div className="flex items-start gap-4">
@@ -31,7 +31,7 @@ export const TestimonialBlock: React.FC<TestimonialBlockProps> = ({ video, conte
             />
           </div>
           <div className="flex flex-col">
-            <div className="flex">
+            <div className="flex justify-between">
               <div className="pb-3">
                 <h6 className="text-secondary">{fullName}</h6>
                 <p className="text-[.65rem]">

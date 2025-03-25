@@ -6,6 +6,8 @@ node_modules
 .next
 .vercel
 
+credentials.json
+
 # Payload default media upload directory
 public/media/
 
