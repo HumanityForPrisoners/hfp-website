@@ -101,6 +101,7 @@ export const plugins: Plugin[] = [
         client_email: process.env.GCS_CLIENT_EMAIL,
         private_key: process.env.GCS_PRIVATE_KEY,
       },
+      
     },
   }),
 ]
