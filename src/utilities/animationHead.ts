@@ -1,7 +1,7 @@
-import Script from "next/script";
+// import Script from 'next/script'
 
-function Animate() {
-  return (
-    
-  )
-}
+// function Animate() {
+//   return (
+
+//   )
+// }

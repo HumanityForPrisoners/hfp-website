@@ -1,6 +1,5 @@
 import clsx from 'clsx'
 import React from 'react'
-import { MainGrid } from '../MainGrid'
 
 export type Props = {
   preHeader: string

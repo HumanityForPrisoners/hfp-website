@@ -17,10 +17,14 @@ import { getServerSideURL } from '@/utilities/getURL'
 
 const openSans = Open_Sans({
   weight: ['400'],
+  subsets: ['latin'],
+  preload: true,
 })
 
 const ptSerif = PT_Serif({
   weight: ['400', '700'],
+  subsets: ['latin'],
+  preload: true,
 })
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
@@ -53,8 +57,4 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 export const metadata: Metadata = {
   metadataBase: new URL(getServerSideURL()),
   openGraph: mergeOpenGraph(),
-  twitter: {
-    card: 'summary_large_image',
-    creator: '@payloadcms',
-  },
 }

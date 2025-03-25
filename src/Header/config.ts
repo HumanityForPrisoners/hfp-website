@@ -142,7 +142,7 @@ export const Header: GlobalConfig = {
               admin: {
                 condition: (_, siblingData) => siblingData.type && siblingData.type === 'phone',
               },
-              validate: (value) => {
+              validate: (value: any) => {
                 return value.toString().length === 10 || 'Phone number must be 10 digits'
               },
               min: 1000000000,
