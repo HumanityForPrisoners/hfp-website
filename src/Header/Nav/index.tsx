@@ -19,7 +19,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
           return <CMSLink key={i} className="text-popover-foreground" {...link} appearance="link" />
         })}
       </div>
-      <div className="col-start-11 h-fit w-fit self-center">
+      <div className="col-end-11 h-fit w-fit self-center">
         {ctaButton.map(({ link }, i) => {
           return <CMSLink key={i} {...link} appearance={'default'} size={'lg'} />
         })}
