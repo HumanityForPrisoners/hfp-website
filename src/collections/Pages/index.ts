@@ -14,6 +14,7 @@ import { ImpactBlock } from '@/blocks/ImpactBlock/config'
 import { TestimonialBlock } from '@/blocks/TestimonialBlock/config'
 import { LogoCarousel } from '@/blocks/LogoCarousel/config'
 import { FeaturedPostsBlock } from '@/blocks/FeaturedPostsBlock/config'
+import { GalleryBlock } from '@/blocks/GalleryBlock/config'
 import { hero } from '@/heros/config'
 import { slugField } from '@/fields/slug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
@@ -95,6 +96,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 TestimonialBlock,
                 LogoCarousel,
                 FeaturedPostsBlock,
+                GalleryBlock,
               ],
               required: true,
               admin: {

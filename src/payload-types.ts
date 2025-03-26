@@ -207,6 +207,7 @@ export interface Page {
     | TestimonialBlock
     | LogoCarousel
     | FeaturedPostsBlock
+    | GalleryBlock
   )[];
   meta?: {
     title?: string | null;
@@ -1014,6 +1015,44 @@ export interface FeaturedPostsBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GalleryBlock".
+ */
+export interface GalleryBlock {
+  leftSide: {
+    pageHeading: {
+      preHeader: string;
+      header: string;
+      description: string;
+      direction: 'left' | 'center';
+    };
+    ctaButton: {
+      type?: ('reference' | 'custom') | null;
+      newTab?: boolean | null;
+      reference?:
+        | ({
+            relationTo: 'pages';
+            value: string | Page;
+          } | null)
+        | ({
+            relationTo: 'posts';
+            value: string | Post;
+          } | null);
+      url?: string | null;
+      label: string;
+    };
+  };
+  rightSide: {
+    images: {
+      image?: (string | null) | Media;
+      id?: string | null;
+    }[];
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'galleryBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1313,6 +1352,7 @@ export interface PagesSelect<T extends boolean = true> {
         testimonialBlock?: T | TestimonialBlockSelect<T>;
         logoCarousel?: T | LogoCarouselSelect<T>;
         featuredPostsBlock?: T | FeaturedPostsBlockSelect<T>;
+        galleryBlock?: T | GalleryBlockSelect<T>;
       };
   meta?:
     | T
@@ -1597,6 +1637,45 @@ export interface FeaturedPostsBlockSelect<T extends boolean = true> {
         reference?: T;
         url?: T;
         label?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GalleryBlock_select".
+ */
+export interface GalleryBlockSelect<T extends boolean = true> {
+  leftSide?:
+    | T
+    | {
+        pageHeading?:
+          | T
+          | {
+              preHeader?: T;
+              header?: T;
+              description?: T;
+              direction?: T;
+            };
+        ctaButton?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
+      };
+  rightSide?:
+    | T
+    | {
+        images?:
+          | T
+          | {
+              image?: T;
+              id?: T;
+            };
       };
   id?: T;
   blockName?: T;

@@ -10,6 +10,7 @@ import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { HeroStatsBlock } from '@/blocks/HeroStats/Component'
 import { AboutUsBlock } from '@/blocks/AboutUsBlock/Component'
 import { FeaturedServicesBlock } from '@/blocks/FeaturedServicesBlock/Component'
+import { GalleryBlock } from './GalleryBlock/Component'
 import { ImpactBlock } from './ImpactBlock/Component'
 import { TestimonialBlock } from '@/blocks/TestimonialBlock/Component'
 import { LogoCarousel } from '@/blocks/LogoCarousel/Component'
@@ -28,6 +29,7 @@ const blockComponents = {
   testimonialBlock: TestimonialBlock,
   logoCarousel: LogoCarousel,
   featuredPostsBlock: FeaturedPostsBlock,
+  galleryBlock: GalleryBlock,
 }
 
 export const RenderBlocks: React.FC<{
