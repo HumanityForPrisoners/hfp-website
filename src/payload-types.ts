@@ -2235,6 +2235,8 @@ export interface Header {
  */
 export interface Footer {
   id: string;
+  logo: string | Media;
+  description: string;
   navItems?:
     | {
         link: {
@@ -2252,6 +2254,35 @@ export interface Footer {
           url?: string | null;
           label: string;
         };
+        id?: string | null;
+      }[]
+    | null;
+  socialLinks?:
+    | {
+        socialLink?: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: string | Post;
+              } | null);
+          url?: string | null;
+        };
+        icon: 'facebook' | 'x' | 'instagram' | 'youtube' | 'linkedin';
+        id?: string | null;
+      }[]
+    | null;
+  contactLinks?:
+    | {
+        type: 'phone' | 'mail' | 'address';
+        emailSelect?: string | null;
+        phoneSelect?: number | null;
+        addressSelect?: string | null;
         id?: string | null;
       }[]
     | null;
@@ -2381,6 +2412,8 @@ export interface HeaderSelect<T extends boolean = true> {
  * via the `definition` "footer_select".
  */
 export interface FooterSelect<T extends boolean = true> {
+  logo?: T;
+  description?: T;
   navItems?:
     | T
     | {
@@ -2393,6 +2426,29 @@ export interface FooterSelect<T extends boolean = true> {
               url?: T;
               label?: T;
             };
+        id?: T;
+      };
+  socialLinks?:
+    | T
+    | {
+        socialLink?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+            };
+        icon?: T;
+        id?: T;
+      };
+  contactLinks?:
+    | T
+    | {
+        type?: T;
+        emailSelect?: T;
+        phoneSelect?: T;
+        addressSelect?: T;
         id?: T;
       };
   updatedAt?: T;
