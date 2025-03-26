@@ -160,6 +160,13 @@ export const Footer: GlobalConfig = {
         },
       ],
     },
+    {
+      name: 'subscribeForm',
+      type: 'relationship',
+      relationTo: 'forms',
+      required: true,
+      maxDepth: 9,
+    },
   ],
   hooks: {
     afterChange: [revalidateFooter],

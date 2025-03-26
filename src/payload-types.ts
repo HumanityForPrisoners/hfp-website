@@ -2286,6 +2286,7 @@ export interface Footer {
         id?: string | null;
       }[]
     | null;
+  subscribeForm: string | Form;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -2451,6 +2452,7 @@ export interface FooterSelect<T extends boolean = true> {
         addressSelect?: T;
         id?: T;
       };
+  subscribeForm?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

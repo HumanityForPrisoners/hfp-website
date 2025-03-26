@@ -16,7 +16,7 @@ export const GalleryBlock: React.FC<GalleryBlockProps> = ({ leftSide, rightSide 
   ]
 
   return (
-    <MainGrid className="pt-0 pb-0 -mb-36">
+    <MainGrid className="pt-0 pb-0 -mb-[28rem] z-10">
       <div className="col-span-12 bg-primary flex items-center justify-center border border-rose-500 border-solid p-16 rounded-lg">
         <div
           className={clsx(
