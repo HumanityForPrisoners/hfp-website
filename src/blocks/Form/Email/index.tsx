@@ -27,6 +27,7 @@ export const Email: React.FC<
       </Label>
       <Input
         defaultValue={defaultValue}
+        placeholder="Your Email"
         id={name}
         type="text"
         {...register(name, { pattern: /^\S[^\s@]*@\S+$/, required })}
