@@ -10,20 +10,20 @@ export const CallToActionBlock: React.FC<CTABlockProps> = ({ backgroundImage, co
   return (
     <div className="bg-secondary relative overflow-clip flex flex-col items-center justify-center w-full h-96">
       <Media
-        className="absolute opacity-50"
-        imgClassName="-z-10 object-cover h-96"
+        className="absolute"
+        imgClassName="-z-10 object-cover h-96 opacity-25"
         resource={backgroundImage}
         loading="lazy"
       />
       <MainGrid className="z-10">
         <div className="flex justify-between items-center h-fit col-span-12">
-          <div className="flex flex-col gap-8 z-10 ">
-            <h6 className="text-secondary">{preHeader}</h6>
+          <div className="flex flex-col gap-8 z-10 w-1/2 ">
+            <h6 className="text-primary">{preHeader}</h6>
             <h2 className="text-primary">{heading}</h2>
             <p className="text-primary">{description}</p>
           </div>
-          <div className="flex flex-col gap-8">
-            <CMSLink appearance="default" size="lg" {...ctaButton} />
+          <div className="flex flex-col gap-8 w-auto pr-36">
+            <CMSLink className="text-primary" appearance="outline" size="lg" {...ctaButton} />
           </div>
         </div>
       </MainGrid>
