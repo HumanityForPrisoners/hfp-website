@@ -13,7 +13,7 @@ export const PostCard: React.FC<Props> = (props) => {
     <div className="col-span-4">
       <Link href={`/posts/${reference.slug}`}>
         <Media
-          imgClassName="w-full h-full rounded-t-3xl"
+          imgClassName="w-full h-72 rounded-t-3xl"
           resource={reference.content.image}
           loading="lazy"
         />

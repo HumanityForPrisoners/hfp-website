@@ -34,7 +34,7 @@ export const GalleryBlock: React.FC<GalleryBlockProps> = ({ leftSide, rightSide 
             return (
               <Media
                 className={clsx('rounded-[4rem]  overflow-hidden w-full h-full', unRoundMap[i])}
-                imgClassName="w-full h-[212px] object-cover"
+                imgClassName="w-full h-56 object-cover"
                 key={i}
                 resource={image.image}
               />
