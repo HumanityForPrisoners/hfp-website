@@ -99,8 +99,6 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
             })}
           </div>
         </nav>
-
-        {/* Phone | Email */}
       </div>
       <div className={clsx('py-2 grid grid-cols-12-90 gap-30 max-w-[73%] mx-auto')}>
         <Link href="/" className="w-fit h-fit self-center col-start-1">

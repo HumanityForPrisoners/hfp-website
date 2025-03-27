@@ -14,9 +14,51 @@ export const Header: GlobalConfig = {
       name: 'navItems',
       type: 'array',
       fields: [
+        {
+          name: 'linkType',
+          type: 'radio',
+          required: true,
+          defaultValue: 'single',
+          options: [
+            {
+              label: 'Single Link',
+              value: 'single',
+            },
+            {
+              label: 'Link Group',
+              value: 'multiple',
+            },
+          ],
+        },
         link({
           appearances: false,
+          overrides: {
+            admin: {
+              condition: (_, siblingData) => {
+                return siblingData.linkType === 'single'
+              },
+            },
+          },
         }),
+        {
+          name: 'multipleLinks',
+          type: 'group',
+          admin: {
+            condition: (_, siblingData) => {
+              return siblingData.linkType === 'multiple'
+            },
+          },
+          fields: [
+            {
+              name: 'label',
+              type: 'text',
+              required: true,
+            },
+            linkGroup({
+              appearances: false,
+            }),
+          ],
+        },
       ],
       maxRows: 6,
       admin: {

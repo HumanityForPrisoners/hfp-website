@@ -8,7 +8,7 @@ import { StatProgressBar } from '@/components/StatProgressBar'
 
 export const ImpactBlock: React.FC<ImpactBlockProps> = ({ leftSide, rightSide }) => {
   return (
-    <MainGrid className="pt-44">
+    <MainGrid className="pt-20">
       <div className="col-span-6">
         <div className="flex flex-col items-end relative">
           <StatCard className="w-80 absolute left-0 bottom-40" {...leftSide.statistic} />
