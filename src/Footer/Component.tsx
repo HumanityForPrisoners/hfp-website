@@ -49,21 +49,21 @@ export async function Footer() {
     <footer className="mt-auto pt-64 bg-secondary text-primary">
       <MainGrid className="pt-0 pb-0">
         <div className="flex flex-col col-start-1 col-span-3">
-          <Link className="flex items-center" href="/">
-            <Logo className="max-w-52" priority="low" logo={footerData.logo as Media} />
+          <Link className="flex items-center pb-6" href="/">
+            <Logo className="max-w-56" priority="low" logo={footerData.logo as Media} />
           </Link>
           <p>{footerData.description}</p>
         </div>
         <div className="col-span-2 col-start-5 flex flex-col">
           <h5>Quick Links</h5>
-          <nav className="flex flex-col gap-4">
+          <nav className="flex flex-col gap-4 pl-6 pt-6">
             {navItems.map(({ link }, i) => {
-              return <CMSLink className="text-white" key={i} {...link} />
+              return <CMSLink className="text-primary list-item text-sm" key={i} {...link} />
             })}
           </nav>
         </div>
         <div className="col-start-7 col-span-3 flex flex-col items-start">
-          <h5>Information</h5>
+          <h5 className="pb-6">Information</h5>
           {contacts.map(({ emailSelect, phoneSelect, addressSelect, type }, i) => {
             const Icon = iconMap[type]
             let contactLink = null
@@ -89,7 +89,7 @@ export async function Footer() {
             }
 
             return (
-              <div className="flex justify-center items-center" key={i}>
+              <div className="flex justify-center items-center gap-1 pb-4" key={i}>
                 {url ? (
                   <CMSLink
                     className="bg-primary rounded-full p-3 w-5 h-5 flex items-center justify-center"
@@ -109,6 +109,26 @@ export async function Footer() {
         </div>
         <div className="col-start-10 col-span-3">
           <FormBlock enableIntro form={footerData.subscribeForm as Form} />
+        </div>
+      </MainGrid>
+      <hr className="container" />
+      <MainGrid className="pt-2 pb-2">
+        <div className="col-span-12 flex justify-between pt-2">
+          <p>Copyright 2024 © Humanity for Prisoners, All Right Reserved</p>
+          <div className="flex gap-2">
+            {footerData.socialLinks?.map(({ socialLink, icon }, i) => {
+              const Icon = iconMap[icon]
+              return (
+                <CMSLink
+                  key={i}
+                  className=" bg-primary rounded-full p-3 w-5 h-5 flex items-center justify-center"
+                  {...socialLink}
+                >
+                  <Icon className="text-secondary" fontSize="inherit" />
+                </CMSLink>
+              )
+            })}
+          </div>
         </div>
       </MainGrid>
     </footer>
