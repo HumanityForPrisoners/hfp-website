@@ -15,10 +15,19 @@ export const FeaturedServicesBlock: Block = {
       relationTo: 'services',
       maxDepth: 9,
     },
+    {
+      name: 'disableCTA',
+      type: 'checkbox',
+      label: 'Disable CTA Button',
+      defaultValue: false,
+    },
     link({
       overrides: {
         name: 'ctaButton',
         label: 'CTA Button',
+        admin: {
+          condition: (_, siblingData) => !siblingData.disableCTA,
+        },
       },
       appearances: false,
     }),

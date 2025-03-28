@@ -11,10 +11,10 @@ import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
 import { Users } from './collections/Users'
+import { Teams } from './collections/Teams'
 import { Services } from './collections/Services'
 import { Footer } from './Footer/config'
 import { Header } from './Header/config'
-import { ServicesHero } from './ServicesHero/config'
 import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
@@ -56,9 +56,9 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
   }),
-  collections: [Pages, Posts, Media, Categories, Users, Services],
+  collections: [Pages, Posts, Media, Categories, Users, Services, Teams],
   cors: [getServerSideURL()].filter(Boolean),
-  globals: [Header, Footer, ServicesHero],
+  globals: [Header, Footer],
   plugins: [
     ...plugins,
     // storage-adapter-placeholder

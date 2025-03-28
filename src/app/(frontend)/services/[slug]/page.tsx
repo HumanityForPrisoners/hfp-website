@@ -6,8 +6,6 @@ import { getPayload } from 'payload'
 import React, { cache } from 'react'
 import RichText from '@/components/RichText'
 
-import type { Post } from '@/payload-types'
-
 import { RenderHero } from '@/heros/RenderHero'
 import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
@@ -38,7 +36,7 @@ type Args = {
   }>
 }
 
-export default async function Post({ params: paramsPromise }: Args) {
+export default async function Service({ params: paramsPromise }: Args) {
   const { slug = '' } = await paramsPromise
   const url = '/services/' + slug
   const service = await queryServiceBySlug({ slug })
@@ -51,7 +49,7 @@ export default async function Post({ params: paramsPromise }: Args) {
 
       {/* Allows redirects for valid pages too */}
       <PayloadRedirects disableNotFound url={url} />
-      <RenderHero {...service.hero} />
+      <RenderHero {...service.hero.hero} />
       <div className="flex items-center justify-center">
         <div className="mx-auto grid-cols-12-90 gap-30 grid pt-16 pb-24">
           <div className="col-span-12 relative">
@@ -65,7 +63,7 @@ export default async function Post({ params: paramsPromise }: Args) {
           </div>
 
           <RichText
-            className="col-span-12 mt-20"
+            className="col-span-12 mt-20 prose-h5:text-secondary"
             data={service.content.description}
             enableGutter={false}
           />

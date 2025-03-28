@@ -1,6 +1,5 @@
 import { CollectionConfig } from 'payload'
 
-
 import {
   BlocksFeature,
   FixedToolbarFeature,
@@ -20,8 +19,6 @@ import {
 
 import { generatePreviewPath } from '@/utilities/generatePreviewPath'
 
-import { hero } from '@/heros/config'
-
 import { Banner } from '@/blocks/Banner/config'
 import { Code } from '@/blocks/Code/config'
 import { MediaBlock } from '@/blocks/MediaBlock/config'
@@ -31,6 +28,7 @@ import { slugField } from '@/fields/slug'
 import { authenticated } from '@/access/authenticated'
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
 import { revalidateDelete, revalidateService } from '@/collections/Services/revalidateServices'
+import { hero } from '@/heros/config'
 
 export const Services: CollectionConfig<'services'> = {
   slug: 'services',
@@ -80,8 +78,9 @@ export const Services: CollectionConfig<'services'> = {
       type: 'tabs',
       tabs: [
         {
-          fields: [hero],
+          name: 'hero',
           label: 'Hero',
+          fields: [hero],
         },
         {
           name: 'content',
