@@ -102,7 +102,6 @@ export const Teams: CollectionConfig<'teams'> = {
               type: 'text',
               label: 'Position',
               required: true,
-              maxLength: 30,
             },
             {
               name: 'image',
