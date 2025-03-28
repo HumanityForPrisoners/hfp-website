@@ -14,7 +14,8 @@ import { GalleryBlock } from './GalleryBlock/Component'
 import { ImpactBlock } from './ImpactBlock/Component'
 import { TestimonialBlock } from '@/blocks/TestimonialBlock/Component'
 import { LogoCarousel } from '@/blocks/LogoCarousel/Component'
-import { FeaturedPostsBlock } from './FeaturedPostsBlock/Component'
+import { FeaturedPostsBlock } from '@/blocks/FeaturedPostsBlock/Component'
+import { TeamMembersBlock } from '@/blocks/TeamMembersBlock/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -30,6 +31,7 @@ const blockComponents = {
   logoCarousel: LogoCarousel,
   featuredPostsBlock: FeaturedPostsBlock,
   galleryBlock: GalleryBlock,
+  teamMembersBlock: TeamMembersBlock,
 }
 
 export const RenderBlocks: React.FC<{

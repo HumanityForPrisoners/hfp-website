@@ -208,6 +208,7 @@ export interface Page {
     | LogoCarousel
     | FeaturedPostsBlock
     | GalleryBlock
+    | TeamMembersBlock
   )[];
   meta?: {
     title?: string | null;
@@ -1064,6 +1065,38 @@ export interface GalleryBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "teamMembersBlock".
+ */
+export interface TeamMembersBlock {
+  pageHeading: {
+    preHeader: string;
+    header: string;
+    description: string;
+    direction: 'left' | 'center';
+  };
+  teams: (string | Team)[];
+  disableCTA?: boolean | null;
+  ctaButton?: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: string | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: string | Post;
+        } | null);
+    url?: string | null;
+    label: string;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'teamMembersBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "teams".
  */
 export interface Team {
@@ -1422,6 +1455,7 @@ export interface PagesSelect<T extends boolean = true> {
         logoCarousel?: T | LogoCarouselSelect<T>;
         featuredPostsBlock?: T | FeaturedPostsBlockSelect<T>;
         galleryBlock?: T | GalleryBlockSelect<T>;
+        teamMembersBlock?: T | TeamMembersBlockSelect<T>;
       };
   meta?:
     | T
@@ -1758,6 +1792,33 @@ export interface GalleryBlockSelect<T extends boolean = true> {
               image?: T;
               id?: T;
             };
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "teamMembersBlock_select".
+ */
+export interface TeamMembersBlockSelect<T extends boolean = true> {
+  pageHeading?:
+    | T
+    | {
+        preHeader?: T;
+        header?: T;
+        description?: T;
+        direction?: T;
+      };
+  teams?: T;
+  disableCTA?: T;
+  ctaButton?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        label?: T;
       };
   id?: T;
   blockName?: T;

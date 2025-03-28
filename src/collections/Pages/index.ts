@@ -15,6 +15,7 @@ import { TestimonialBlock } from '@/blocks/TestimonialBlock/config'
 import { LogoCarousel } from '@/blocks/LogoCarousel/config'
 import { FeaturedPostsBlock } from '@/blocks/FeaturedPostsBlock/config'
 import { GalleryBlock } from '@/blocks/GalleryBlock/config'
+import { TeamMembersBlock } from '@/blocks/TeamMembersBlock/config'
 import { hero } from '@/heros/config'
 import { slugField } from '@/fields/slug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
@@ -97,6 +98,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 LogoCarousel,
                 FeaturedPostsBlock,
                 GalleryBlock,
+                TeamMembersBlock,
               ],
               required: true,
               admin: {
