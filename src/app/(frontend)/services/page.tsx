@@ -59,7 +59,7 @@ export default async function Page() {
         />
       </div>
       <div className="flex items-center justify-center">
-        <div className="mx-auto grid-cols-12-90 gap-30 grid pt-8 pb-24 h-fit">
+        <div className="mx-auto grid-cols-12-90 gap-x-30 gap-y-32 grid pt-8 pb-24 h-fit">
           {services?.docs.map((result, i) => {
             return <ServiceCard key={i} reference={result} />
           })}

@@ -1,5 +1,4 @@
 'use client'
-
 import React from 'react'
 
 import type { Header as HeaderType } from '@/payload-types'
@@ -20,7 +19,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
             return (
               <CMSLink key={i} className="text-popover-foreground" {...link} appearance="link" />
             )
-          } else {
+          } else if (linkType === 'multiple') {
             return (
               <div key={i} className="group hover:cursor-pointer">
                 <div className="flex gap-1 justify-center items-center">

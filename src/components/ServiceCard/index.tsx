@@ -13,8 +13,8 @@ export const ServiceCard: React.FC<Props> = (props) => {
     <div className="col-span-4 relative">
       <Link href={`/services/${reference.slug}`}>
         <Media
-          className="rounded-3xl"
-          imgClassName="rounded-3xl w-full h-full"
+          className="rounded-3xl h-80"
+          imgClassName="rounded-3xl w-full h-full object-cover"
           resource={reference.content.image}
           loading="lazy"
         />
