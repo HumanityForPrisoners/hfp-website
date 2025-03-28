@@ -735,6 +735,10 @@ export interface Form {
  * via the `definition` "HeroStatsBlock".
  */
 export interface HeroStatsBlock {
+  options: {
+    modifyForHomepage: boolean;
+    removeBackground: boolean;
+  };
   Stats?:
     | {
         mainStat: string;
@@ -927,6 +931,10 @@ export interface Service {
 export interface ImpactBlock {
   leftSide: {
     image: string | Media;
+    options: {
+      modifyForHomepage: boolean;
+      removeBackground: boolean;
+    };
     statistic: {
       mainStat: string;
       subtitle: string;
@@ -1519,6 +1527,12 @@ export interface FormBlockSelect<T extends boolean = true> {
  * via the `definition` "HeroStatsBlock_select".
  */
 export interface HeroStatsBlockSelect<T extends boolean = true> {
+  options?:
+    | T
+    | {
+        modifyForHomepage?: T;
+        removeBackground?: T;
+      };
   Stats?:
     | T
     | {
@@ -1608,6 +1622,12 @@ export interface ImpactBlockSelect<T extends boolean = true> {
     | T
     | {
         image?: T;
+        options?:
+          | T
+          | {
+              modifyForHomepage?: T;
+              removeBackground?: T;
+            };
         statistic?:
           | T
           | {

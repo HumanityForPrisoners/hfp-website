@@ -8,6 +8,32 @@ export const HeroStats: Block = {
   },
   fields: [
     {
+      name: 'options',
+      type: 'group',
+      fields: [
+        {
+          name: 'modifyForHomepage',
+          type: 'checkbox',
+          label: 'Modify for Homepage?',
+          defaultValue: false,
+          required: true,
+          admin: {
+            width: '50%',
+          },
+        },
+        {
+          name: 'removeBackground',
+          type: 'checkbox',
+          label: 'Remove background?',
+          defaultValue: false,
+          required: true,admin: {
+            width: '50%',
+          },
+        },
+      ],
+    },
+
+    {
       name: 'Stats',
       type: 'array',
       labels: {

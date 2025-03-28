@@ -34,6 +34,10 @@ import { link } from '@/fields/link'
 
 export const Teams: CollectionConfig<'teams'> = {
   slug: 'teams',
+  labels: {
+    singular: 'Team Member',
+    plural: 'Team Members',
+  },
   access: {
     create: authenticated,
     delete: authenticated,

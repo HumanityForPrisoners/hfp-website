@@ -7,11 +7,17 @@ import { PageHeading } from '@/components/PageHeading'
 import { StatProgressBar } from '@/components/StatProgressBar'
 
 export const ImpactBlock: React.FC<ImpactBlockProps> = ({ leftSide, rightSide }) => {
+  const { options } = leftSide
   return (
     <MainGrid className="pt-20">
       <div className="col-span-6">
         <div className="flex flex-col items-end relative">
-          <StatCard className="w-80 absolute left-0 bottom-40" {...leftSide.statistic} />
+          <StatCard
+            className="w-80 absolute left-0 bottom-40"
+            mdf={options.modifyForHomepage}
+            rmbg={options.removeBackground}
+            {...leftSide.statistic}
+          />
           <Media
             imgClassName="rounded-3xl h-[42rem] object-cover"
             className="w-[34rem]"

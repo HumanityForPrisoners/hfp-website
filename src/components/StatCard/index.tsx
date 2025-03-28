@@ -4,15 +4,18 @@ import React from 'react'
 export type Props = {
   mainStat: string
   subtitle: string
+  mdf: boolean
+  rmbg: boolean
 } & React.HTMLAttributes<HTMLDivElement>
 
 export const StatCard: React.FC<Props> = (props) => {
-  const { mainStat, subtitle, className } = props
+  const { mainStat, subtitle, className, mdf, rmbg } = props
 
   return (
     <div
       className={clsx(
-        'flex flex-col bg-primary py-6 px-2 items-center rounded-3xl rounded-ss-none  shadow-lg text-secondary',
+        (mdf || !rmbg) && 'bg-primary rounded-3xl rounded-ss-none shadow-lg',
+        'flex flex-col py-6 px-2 items-center text-secondary',
         className,
       )}
     >
