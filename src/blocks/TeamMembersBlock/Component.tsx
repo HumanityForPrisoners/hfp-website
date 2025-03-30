@@ -15,10 +15,10 @@ export const TeamMembersBlock: React.FC<TeamMembersBlockProps> = ({
 
   return (
     <>
-      <MainGrid className="pt-8 pb-24 gap-y-28">
+      <MainGrid className="pt-8 pb-24 gap-y-16">
         <PageHeading {...pageHeading} className="col-span-6" />
         {filteredTeams.map((team, i) => {
-          return <TeamCard key={i} reference={team} />
+          return <TeamCard className="col-span-4" key={i} reference={team} />
         })}
       </MainGrid>
       {!disableCTA && (
