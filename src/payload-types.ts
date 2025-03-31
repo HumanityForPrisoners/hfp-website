@@ -210,6 +210,7 @@ export interface Page {
     | GalleryBlock
     | TeamMembersBlock
     | VolunteerFormBlock
+    | FullGalleryBlock
   )[];
   meta?: {
     title?: string | null;
@@ -1179,6 +1180,36 @@ export interface VolunteerFormBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FullGalleryBlock".
+ */
+export interface FullGalleryBlock {
+  pageHeading: {
+    preHeader: string;
+    header: string;
+    description: string;
+    direction: 'left' | 'center';
+  };
+  row?:
+    | {
+        rowContent?:
+          | {
+              mediaGroup?: {
+                mediaSelect?: ('image' | 'video') | null;
+                video?: string | null;
+                image?: (string | null) | Media;
+              };
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'fullGalleryBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1485,6 +1516,7 @@ export interface PagesSelect<T extends boolean = true> {
         galleryBlock?: T | GalleryBlockSelect<T>;
         teamMembersBlock?: T | TeamMembersBlockSelect<T>;
         volunteerFormBlock?: T | VolunteerFormBlockSelect<T>;
+        fullGalleryBlock?: T | FullGalleryBlockSelect<T>;
       };
   meta?:
     | T
@@ -1861,6 +1893,39 @@ export interface VolunteerFormBlockSelect<T extends boolean = true> {
   form?: T;
   enableIntro?: T;
   introContent?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FullGalleryBlock_select".
+ */
+export interface FullGalleryBlockSelect<T extends boolean = true> {
+  pageHeading?:
+    | T
+    | {
+        preHeader?: T;
+        header?: T;
+        description?: T;
+        direction?: T;
+      };
+  row?:
+    | T
+    | {
+        rowContent?:
+          | T
+          | {
+              mediaGroup?:
+                | T
+                | {
+                    mediaSelect?: T;
+                    video?: T;
+                    image?: T;
+                  };
+              id?: T;
+            };
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }

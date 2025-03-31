@@ -18,6 +18,7 @@ import { GalleryBlock } from '@/blocks/GalleryBlock/config'
 import { TeamMembersBlock } from '@/blocks/TeamMembersBlock/config'
 import { VolunteerFormBlock } from '@/blocks/VolunteerForm/config'
 import { hero } from '@/heros/config'
+import { FullGalleryBlock } from '@/blocks/FullGalleryBlock/config'
 import { slugField } from '@/fields/slug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
@@ -101,6 +102,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 GalleryBlock,
                 TeamMembersBlock,
                 VolunteerFormBlock,
+                FullGalleryBlock,
               ],
               required: true,
               admin: {
