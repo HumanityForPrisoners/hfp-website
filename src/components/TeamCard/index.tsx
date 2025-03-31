@@ -61,7 +61,7 @@ export const TeamCard: React.FC<Props> = (props) => {
       <div className="w-full h-auto px-6 py-4">
         <div className="flex flex-col gap-3 items-center justify-center">
           <h4 className="text-3xl text-secondary">{reference.fullName}</h4>
-          <p>{reference.about.position}</p>
+          <p className="text-center">{reference.about.position}</p>
         </div>
       </div>
     </div>

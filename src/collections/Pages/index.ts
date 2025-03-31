@@ -16,6 +16,7 @@ import { LogoCarousel } from '@/blocks/LogoCarousel/config'
 import { FeaturedPostsBlock } from '@/blocks/FeaturedPostsBlock/config'
 import { GalleryBlock } from '@/blocks/GalleryBlock/config'
 import { TeamMembersBlock } from '@/blocks/TeamMembersBlock/config'
+import { VolunteerFormBlock } from '@/blocks/VolunteerForm/config'
 import { hero } from '@/heros/config'
 import { slugField } from '@/fields/slug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
@@ -99,6 +100,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 FeaturedPostsBlock,
                 GalleryBlock,
                 TeamMembersBlock,
+                VolunteerFormBlock,
               ],
               required: true,
               admin: {

@@ -209,6 +209,7 @@ export interface Page {
     | FeaturedPostsBlock
     | GalleryBlock
     | TeamMembersBlock
+    | VolunteerFormBlock
   )[];
   meta?: {
     title?: string | null;
@@ -1151,6 +1152,33 @@ export interface Team {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "VolunteerFormBlock".
+ */
+export interface VolunteerFormBlock {
+  image: string | Media;
+  form: string | Form;
+  enableIntro?: boolean | null;
+  introContent?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'volunteerFormBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1456,6 +1484,7 @@ export interface PagesSelect<T extends boolean = true> {
         featuredPostsBlock?: T | FeaturedPostsBlockSelect<T>;
         galleryBlock?: T | GalleryBlockSelect<T>;
         teamMembersBlock?: T | TeamMembersBlockSelect<T>;
+        volunteerFormBlock?: T | VolunteerFormBlockSelect<T>;
       };
   meta?:
     | T
@@ -1820,6 +1849,18 @@ export interface TeamMembersBlockSelect<T extends boolean = true> {
         url?: T;
         label?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "VolunteerFormBlock_select".
+ */
+export interface VolunteerFormBlockSelect<T extends boolean = true> {
+  image?: T;
+  form?: T;
+  enableIntro?: T;
+  introContent?: T;
   id?: T;
   blockName?: T;
 }

@@ -16,6 +16,7 @@ import { TestimonialBlock } from '@/blocks/TestimonialBlock/Component'
 import { LogoCarousel } from '@/blocks/LogoCarousel/Component'
 import { FeaturedPostsBlock } from '@/blocks/FeaturedPostsBlock/Component'
 import { TeamMembersBlock } from '@/blocks/TeamMembersBlock/Component'
+import { VolunteerFormBlock } from '@/blocks/VolunteerForm/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -32,6 +33,7 @@ const blockComponents = {
   featuredPostsBlock: FeaturedPostsBlock,
   galleryBlock: GalleryBlock,
   teamMembersBlock: TeamMembersBlock,
+  volunteerFormBlock: VolunteerFormBlock,
 }
 
 export const RenderBlocks: React.FC<{
