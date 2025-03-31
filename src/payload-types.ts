@@ -211,6 +211,7 @@ export interface Page {
     | TeamMembersBlock
     | VolunteerFormBlock
     | FullGalleryBlock
+    | FaqBlock
   )[];
   meta?: {
     title?: string | null;
@@ -1210,6 +1211,35 @@ export interface FullGalleryBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FaqBlock".
+ */
+export interface FaqBlock {
+  pageHeading: {
+    preHeader: string;
+    header: string;
+    description: string;
+    direction: 'left' | 'center';
+  };
+  leftSide?:
+    | {
+        question: string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
+  rightSide?:
+    | {
+        question: string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'faqBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1517,6 +1547,7 @@ export interface PagesSelect<T extends boolean = true> {
         teamMembersBlock?: T | TeamMembersBlockSelect<T>;
         volunteerFormBlock?: T | VolunteerFormBlockSelect<T>;
         fullGalleryBlock?: T | FullGalleryBlockSelect<T>;
+        faqBlock?: T | FaqBlockSelect<T>;
       };
   meta?:
     | T
@@ -1924,6 +1955,36 @@ export interface FullGalleryBlockSelect<T extends boolean = true> {
                   };
               id?: T;
             };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FaqBlock_select".
+ */
+export interface FaqBlockSelect<T extends boolean = true> {
+  pageHeading?:
+    | T
+    | {
+        preHeader?: T;
+        header?: T;
+        description?: T;
+        direction?: T;
+      };
+  leftSide?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  rightSide?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
         id?: T;
       };
   id?: T;
