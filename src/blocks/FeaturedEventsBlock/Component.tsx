@@ -1,22 +1,19 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { FeaturedEventsBlock as FeaturedEventsBlockProps, Event } from '@/payload-types'
 import { EventCard } from '@/components/EventCard'
 import { CMSLink } from '@/components/Link'
-import { PageHeading } from '@/components/PageHeading'
 import { MainGrid } from '@/components/MainGrid'
 
 export const FeaturedEventsBlock: React.FC<FeaturedEventsBlockProps> = ({
     events,
     ctaButton,
-    pageHeading,
     disableCTA,
 }) => {
     const filteredEvents: Event[] = (events || []).filter((s): s is Event => typeof s === 'object')
 
     return (
-        <>
+        <Fragment>
             <MainGrid className="pt-8 pb-24 gap-y-14">
-                <PageHeading {...pageHeading} className="col-span-6" />
                 <h3 className="col-span-12">Upcoming Events</h3>
                 {filteredEvents.map(({ content, title, slug, eventAt }, i) => {
                     const today = new Date()
@@ -43,6 +40,6 @@ export const FeaturedEventsBlock: React.FC<FeaturedEventsBlockProps> = ({
                     <CMSLink {...ctaButton} appearance={'default'} size={'lg'} />
                 </div>
             )}
-        </>
+        </Fragment>
     )
 }

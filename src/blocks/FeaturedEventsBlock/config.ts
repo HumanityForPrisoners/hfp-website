@@ -1,11 +1,9 @@
 import { Block } from 'payload'
 import { link } from '@/fields/link'
-import { PageHeading } from '@/fields/pageHeading'
 
 export const FeaturedEventsBlock: Block = {
     slug: 'featuredEventsBlock',
     fields: [
-        PageHeading,
         {
             name: 'events',
             type: 'relationship',

@@ -1246,12 +1246,6 @@ export interface FaqBlock {
  * via the `definition` "FeaturedEventsBlock".
  */
 export interface FeaturedEventsBlock {
-  pageHeading: {
-    preHeader: string;
-    header: string;
-    description: string;
-    direction: 'left' | 'center';
-  };
   events: (string | Event)[];
   disableCTA?: boolean | null;
   ctaButton?: {
@@ -2125,14 +2119,6 @@ export interface FaqBlockSelect<T extends boolean = true> {
  * via the `definition` "FeaturedEventsBlock_select".
  */
 export interface FeaturedEventsBlockSelect<T extends boolean = true> {
-  pageHeading?:
-    | T
-    | {
-        preHeader?: T;
-        header?: T;
-        description?: T;
-        direction?: T;
-      };
   events?: T;
   disableCTA?: T;
   ctaButton?:
