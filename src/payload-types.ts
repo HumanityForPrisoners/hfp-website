@@ -214,6 +214,7 @@ export interface Page {
     | VolunteerFormBlock
     | FullGalleryBlock
     | FaqBlock
+    | FeaturedEventsBlock
   )[];
   meta?: {
     title?: string | null;
@@ -1242,6 +1243,38 @@ export interface FaqBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeaturedEventsBlock".
+ */
+export interface FeaturedEventsBlock {
+  pageHeading: {
+    preHeader: string;
+    header: string;
+    description: string;
+    direction: 'left' | 'center';
+  };
+  events: (string | Event)[];
+  disableCTA?: boolean | null;
+  ctaButton?: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: string | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: string | Post;
+        } | null);
+    url?: string | null;
+    label: string;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'featuredEventsBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "events".
  */
 export interface Event {
@@ -1644,6 +1677,7 @@ export interface PagesSelect<T extends boolean = true> {
         volunteerFormBlock?: T | VolunteerFormBlockSelect<T>;
         fullGalleryBlock?: T | FullGalleryBlockSelect<T>;
         faqBlock?: T | FaqBlockSelect<T>;
+        featuredEventsBlock?: T | FeaturedEventsBlockSelect<T>;
       };
   meta?:
     | T
@@ -2082,6 +2116,33 @@ export interface FaqBlockSelect<T extends boolean = true> {
         question?: T;
         answer?: T;
         id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeaturedEventsBlock_select".
+ */
+export interface FeaturedEventsBlockSelect<T extends boolean = true> {
+  pageHeading?:
+    | T
+    | {
+        preHeader?: T;
+        header?: T;
+        description?: T;
+        direction?: T;
+      };
+  events?: T;
+  disableCTA?: T;
+  ctaButton?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        label?: T;
       };
   id?: T;
   blockName?: T;

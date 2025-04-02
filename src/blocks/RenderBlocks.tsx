@@ -19,6 +19,7 @@ import { TeamMembersBlock } from '@/blocks/TeamMembersBlock/Component'
 import { VolunteerFormBlock } from '@/blocks/VolunteerForm/Component'
 import { FullGalleryBlock } from '@/blocks/FullGalleryBlock/Component'
 import { FaqBlock } from '@/blocks/FaqBlock/Component'
+import { FeaturedEventsBlock } from './FeaturedEventsBlock/Component'
 
 const blockComponents = {
     archive: ArchiveBlock,
@@ -38,6 +39,7 @@ const blockComponents = {
     volunteerFormBlock: VolunteerFormBlock,
     fullGalleryBlock: FullGalleryBlock,
     faqBlock: FaqBlock,
+    featuredEventsBlock: FeaturedEventsBlock,
 }
 
 export const RenderBlocks: React.FC<{

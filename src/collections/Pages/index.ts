@@ -20,6 +20,7 @@ import { VolunteerFormBlock } from '@/blocks/VolunteerForm/config'
 import { hero } from '@/heros/config'
 import { FullGalleryBlock } from '@/blocks/FullGalleryBlock/config'
 import { FaqBlock } from '@/blocks/FaqBlock/config'
+import { FeaturedEventsBlock } from '@/blocks/FeaturedEventsBlock/config'
 import { slugField } from '@/fields/slug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
@@ -105,6 +106,7 @@ export const Pages: CollectionConfig<'pages'> = {
                                 VolunteerFormBlock,
                                 FullGalleryBlock,
                                 FaqBlock,
+                                FeaturedEventsBlock,
                             ],
                             required: true,
                             admin: {

@@ -46,6 +46,7 @@ export const Events: CollectionConfig<'events'> = {
             image: true,
             description: true,
         },
+        eventAt: true,
     },
     admin: {
         defaultColumns: ['title', 'slug', 'updatedAt'],
@@ -160,21 +161,12 @@ export const Events: CollectionConfig<'events'> = {
         {
             name: 'eventAt',
             type: 'date',
+            label: 'Event Date',
             admin: {
                 date: {
                     pickerAppearance: 'dayAndTime',
                 },
                 position: 'sidebar',
-            },
-            hooks: {
-                beforeChange: [
-                    ({ siblingData, value }) => {
-                        if (siblingData._status === 'published' && !value) {
-                            return new Date()
-                        }
-                        return value
-                    },
-                ],
             },
         },
         ...slugField(),
