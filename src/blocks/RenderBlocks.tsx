@@ -5,7 +5,6 @@ import type { Page } from '@/payload-types'
 import { ArchiveBlock } from '@/blocks/ArchiveBlock/Component'
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
 import { ContentBlock } from '@/blocks/Content/Component'
-import { FormBlock } from '@/blocks/Form/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { HeroStatsBlock } from '@/blocks/HeroStats/Component'
 import { AboutUsBlock } from '@/blocks/AboutUsBlock/Component'
@@ -20,12 +19,12 @@ import { VolunteerFormBlock } from '@/blocks/VolunteerForm/Component'
 import { FullGalleryBlock } from '@/blocks/FullGalleryBlock/Component'
 import { FaqBlock } from '@/blocks/FaqBlock/Component'
 import { FeaturedEventsBlock } from './FeaturedEventsBlock/Component'
+import { ResourcesBlock } from '@/blocks/ResourcesBlock/Component'
 
 const blockComponents = {
     archive: ArchiveBlock,
     content: ContentBlock,
     cta: CallToActionBlock,
-    formBlock: FormBlock,
     heroStats: HeroStatsBlock,
     mediaBlock: MediaBlock,
     aboutUsBlock: AboutUsBlock,
@@ -40,6 +39,7 @@ const blockComponents = {
     fullGalleryBlock: FullGalleryBlock,
     faqBlock: FaqBlock,
     featuredEventsBlock: FeaturedEventsBlock,
+    resourcesBlock: ResourcesBlock,
 }
 
 export const RenderBlocks: React.FC<{

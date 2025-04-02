@@ -5,7 +5,6 @@ import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
 import { Archive } from '../../blocks/ArchiveBlock/config'
 import { CallToAction } from '../../blocks/CallToAction/config'
 import { Content } from '../../blocks/Content/config'
-import { FormBlock } from '../../blocks/Form/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
 import { HeroStats } from '@/blocks/HeroStats/config'
 import { AboutUsBlock } from '@/blocks/AboutUsBlock/config'
@@ -21,6 +20,7 @@ import { hero } from '@/heros/config'
 import { FullGalleryBlock } from '@/blocks/FullGalleryBlock/config'
 import { FaqBlock } from '@/blocks/FaqBlock/config'
 import { FeaturedEventsBlock } from '@/blocks/FeaturedEventsBlock/config'
+import { ResourcesBlock } from '@/blocks/ResourcesBlock/config'
 import { slugField } from '@/fields/slug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
@@ -93,7 +93,6 @@ export const Pages: CollectionConfig<'pages'> = {
                                 Content,
                                 MediaBlock,
                                 Archive,
-                                FormBlock,
                                 HeroStats,
                                 AboutUsBlock,
                                 FeaturedServicesBlock,
@@ -107,6 +106,7 @@ export const Pages: CollectionConfig<'pages'> = {
                                 FullGalleryBlock,
                                 FaqBlock,
                                 FeaturedEventsBlock,
+                                ResourcesBlock,
                             ],
                             required: true,
                             admin: {
