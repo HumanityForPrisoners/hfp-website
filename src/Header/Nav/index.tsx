@@ -28,7 +28,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
                         return (
                             <div key={i} className="group hover:cursor-pointer">
                                 <div className="flex gap-1 justify-center items-center">
-                                    <p className="text-popover-foreground ">
+                                    <p className="text-popover-foreground text-nowrap">
                                         {multipleLinks?.label}
                                     </p>
                                     <ChevronDown className="inline text-ring w-[.7rem] group-hover:-rotate-90 transition-transform" />
@@ -39,7 +39,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
                                             <CMSLink
                                                 key={j}
                                                 appearance="link"
-                                                className="text-popover-foreground w-36 text-center rounded-none p-4 bg-primary border border-foreground hover:bg-secondary hover:text-primary transition-colors first:rounded-tr-xl last:rounded-b-xl"
+                                                className="text-popover-foreground w-40 text-center rounded-none p-4 bg-primary border border-foreground hover:bg-secondary hover:text-primary transition-colors first:rounded-tr-xl last:rounded-b-xl"
                                                 {...subLink.link}
                                             />
                                         )
