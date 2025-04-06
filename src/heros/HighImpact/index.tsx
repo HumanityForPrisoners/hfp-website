@@ -23,8 +23,8 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
             )}
             <div className="absolute inset-0 bg-black bg-opacity-50 z-0"></div>
             {/* Text Content Overlay */}
-            <div className="mx-auto grid-cols-12-90 gap-30 grid pb-24 z-10">
-                <div className="md:text-left col-start-7 col-span-full">
+            <div className="mx-auto grid-cols-12-90 gap-30 grid pb-24 z-10 xl:p-6">
+                <div className="md:text-left col-start-7 col-span-full lg:col-start-1 lg:col-span-10">
                     {richText && (
                         <RichText
                             className="mb-6 prose-h1:text-primary 
