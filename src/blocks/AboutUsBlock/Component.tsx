@@ -33,8 +33,8 @@ export const AboutUsBlock: React.FC<AboutUsBlockProps> = ({ leftSide, rightSide 
         volunteerActivism: VolunteerActivism,
     }
     return (
-        <MainGrid>
-            <div className="col-span-6 flex flex-col gap-3">
+        <MainGrid className="lg:px-6">
+            <div className="col-span-6 flex flex-col gap-3 lg:col-span-full lg:pb-10">
                 <PageHeading {...leftSide.pageHeading} className="pb-2" />
                 <div>
                     {leftSide.values?.map(({ icon, valueTitle, valueDescription }, i) => {
@@ -61,16 +61,16 @@ export const AboutUsBlock: React.FC<AboutUsBlockProps> = ({ leftSide, rightSide 
                 />
             </div>
 
-            <div className="col-span-6 relative flex flex-col items-center">
+            <div className="col-span-6 relative flex flex-col items-center lg:col-span-full">
                 <Media
                     imgClassName="rounded-[5rem] rounded-tr-none h-64 w-[25rem] object-cover"
-                    className="z-11 w-fit -mb-4 pl-56"
+                    className="z-11 w-fit -mb-4 pl-56 lg:pl-32"
                     resource={rightSide.topImage}
                     loading="lazy"
                 />
                 <Media
                     imgClassName="rounded-[5rem] rounded-tl-none h-64 w-[25rem] object-cover"
-                    className="z-10 w-fit -mt-4 pr-56"
+                    className="z-10 w-fit -mt-4 pr-56 lg:pr-32"
                     resource={rightSide.bottomImage}
                     loading="lazy"
                 />
