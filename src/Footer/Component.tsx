@@ -54,7 +54,7 @@ export async function Footer() {
                     </Link>
                     <p>{footerData.description}</p>
                 </div>
-                <div className="col-span-2 lg:col-span-6 lg:col-start-1 col-start-5 flex flex-col lg:items-center">
+                <div className="col-span-2 lg:col-span-5 lg:col-start-1 col-start-5 flex flex-col lg:items-center">
                     <h5>Quick Links</h5>
                     <nav className="flex flex-col gap-4 pl-6 pt-6">
                         {navItems.map(({ link }, i) => {
@@ -68,7 +68,7 @@ export async function Footer() {
                         })}
                     </nav>
                 </div>
-                <div className="col-start-7 lg:col-start-7 col-span-3 lg:col-span-6 flex flex-col items-start">
+                <div className="col-start-7 lg:col-start-6 col-span-3 lg:col-span-6 flex flex-col items-start">
                     <h5 className="pb-6">Information</h5>
                     {contacts.map(({ emailSelect, phoneSelect, addressSelect, type }, i) => {
                         const Icon = iconMap[type]
