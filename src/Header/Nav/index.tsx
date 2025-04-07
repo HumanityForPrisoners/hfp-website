@@ -44,7 +44,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
     }
 
     return (
-        <nav className="contents items-center w-full">
+        <nav className="contents items-center w-full lg:px-6">
             {/* NAV ITEMS */}
             <div className="flex gap-30 items-center col-start-4 w-fit lg:hidden">
                 {navItems.map(({ link, multipleLinks, linkType }, i) => {
@@ -86,7 +86,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
 
             {/* Burger Menu */}
             <div
-                className="hidden lg:flex cursor-pointer col-start-12 w-fit h-full items-center"
+                className="hidden lg:flex cursor-pointer col-start-11 w-fit h-full items-center"
                 onClick={handleOpen}
             >
                 <Menu />
