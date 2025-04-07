@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 export const ResourcesBlock: React.FC<ResourcesBlockType> = ({ linkGroup }) => {
     return (
-        <MainGrid>
+        <MainGrid className="lg:px-6">
             {linkGroup.map(({ title, links }, i) => {
                 return (
                     <div key={i} className="bg-primary p-8 shadow-lg col-span-12 rounded-3xl">
