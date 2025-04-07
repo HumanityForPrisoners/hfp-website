@@ -51,7 +51,7 @@ export default async function Event({ params: paramsPromise }: Args) {
             <PayloadRedirects disableNotFound url={url} />
             <RenderHero {...event.hero.hero} />
             <div className="flex items-center justify-center">
-                <div className="mx-auto grid-cols-12-90 gap-30 grid pt-16 pb-24">
+                <div className="mx-auto grid-cols-12-90 gap-30 grid pt-16 pb-24 lg:px-6">
                     <div className="col-span-12 relative">
                         <Media
                             imgClassName="rounded-3xl w-full max-h-[90vh] object-cover"
