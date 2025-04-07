@@ -17,7 +17,7 @@ export const GalleryBlock: React.FC<GalleryBlockProps> = ({ leftSide, rightSide 
 
     return (
         <MainGrid className="pt-0 pb-0 -mb-[28rem] z-10 lg:px-6">
-            <div className="col-span-12 bg-primary flex lg:flex-col items-center justify-center p-16 rounded-lg">
+            <div className="col-span-12 bg-primary flex lg:flex-col items-center justify-center p-16 md:px-6 md:py-16 rounded-lg">
                 <div
                     className={clsx(
                         direction === 'left' ? 'items-start' : 'items-center',
