@@ -17,11 +17,11 @@ export const TestimonialBlock: React.FC<TestimonialBlockProps> = ({ video, conte
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; web-share"
                 referrerPolicy="strict-origin-when-cross-origin"
             />
-            <div className="rounded-[7rem] z-11 rounded-tr-none h-96 bg-primary flex flex-col justify-center shadow-md col-span-7 lg:col-span-full col-start-6 lg:col-start-1 mt-44 lg:mt-0 gap-6 row-start-1 lg:row-start-2 p-16 lg:h-fit">
+            <div className="rounded-[7rem] z-11 rounded-tr-none h-96 bg-primary flex flex-col justify-center shadow-md col-span-7 lg:col-span-full col-start-6 lg:col-start-1 mt-44 lg:mt-0 gap-6 row-start-1 lg:row-start-2 p-16 lg:px-10 lg:py-16 lg:h-fit">
                 <h6 className="text-secondary">{preHeading}</h6>
                 <h3 className="text-ring">{heading}</h3>
                 <div className="flex items-start gap-4">
-                    <div className="w-auto">
+                    <div className="w-auto lg:hidden">
                         <Media
                             resource={profilePic}
                             className="relative w-12 h-12 rounded-full overflow-hidden"
@@ -30,7 +30,7 @@ export const TestimonialBlock: React.FC<TestimonialBlockProps> = ({ video, conte
                             loading="lazy"
                         />
                     </div>
-                    <div className="flex flex-col">
+                    <div className="flex flex-col lg:w-fit">
                         <div className="flex justify-between">
                             <div className="pb-3">
                                 <h6 className="text-secondary">{fullName}</h6>
@@ -45,7 +45,7 @@ export const TestimonialBlock: React.FC<TestimonialBlockProps> = ({ video, conte
                                 <FormatQuoteIcon fontSize="inherit" className="text-secondary" />
                             </div>
                         </div>
-                        <p className="italic">{testimonial}</p>
+                        <p className="italic lg:text-wrap">{testimonial}</p>
                     </div>
                 </div>
             </div>
