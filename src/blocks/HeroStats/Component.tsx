@@ -10,18 +10,18 @@ export const HeroStatsBlock: React.FC<HeroStatBlockProps> = ({ Stats, options })
         <div
             className={clsx(
                 options.modifyForHomepage && '-mt-36',
-                'relative flex items-center justify-center',
+                'relative flex items-center justify-center lg:text-center lg:px-6',
                 options.modifyForHomepage && 'lg:hidden',
             )}
         >
-            <div className="grid grid-cols-12-90 gap-30 mx-auto relative">
+            <div className="grid grid-cols-12-90 lg:grid-cols-2 gap-30 mx-auto relative">
                 {(Stats || []).map((stat, i) => {
                     return (
                         <StatCard
                             key={i}
                             mainStat={stat.mainStat}
                             subtitle={stat.subtitle}
-                            className="col-span-3"
+                            className="col-span-3 lg:col-span-1"
                             mdf={options.modifyForHomepage}
                             rmbg={options.removeBackground}
                         />
