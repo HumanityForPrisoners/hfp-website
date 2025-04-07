@@ -17,178 +17,185 @@ import { Media } from '@/components/Media'
 import { Media as MediaType } from '@/payload-types'
 
 export type VolunteerFormBlockType = {
-  blockName?: string
-  blockType?: 'volunteerFormBlock'
-  enableIntro: boolean
-  form: FormType
-  introContent?: SerializedEditorState
-  image: MediaType
+    blockName?: string
+    blockType?: 'volunteerFormBlock'
+    enableIntro: boolean
+    form: FormType
+    introContent?: SerializedEditorState
+    image: MediaType
 }
 
 export const VolunteerFormBlock: React.FC<
-  {
-    id?: string
-  } & VolunteerFormBlockType
+    {
+        id?: string
+    } & VolunteerFormBlockType
 > = (props) => {
-  const {
-    enableIntro,
-    form: formFromProps,
-    form: { id: formID, confirmationMessage, confirmationType, redirect, submitButtonLabel } = {},
-    introContent,
-    image,
-  } = props
+    const {
+        enableIntro,
+        form: formFromProps,
+        form: {
+            id: formID,
+            confirmationMessage,
+            confirmationType,
+            redirect,
+            submitButtonLabel,
+        } = {},
+        introContent,
+        image,
+    } = props
 
-  const formMethods = useForm({
-    defaultValues: formFromProps.fields,
-  })
-  const {
-    control,
-    formState: { errors },
-    handleSubmit,
-    register,
-  } = formMethods
+    const formMethods = useForm({
+        defaultValues: formFromProps.fields,
+    })
+    const {
+        control,
+        formState: { errors },
+        handleSubmit,
+        register,
+    } = formMethods
 
-  const [isLoading, setIsLoading] = useState(false)
-  const [hasSubmitted, setHasSubmitted] = useState<boolean>()
-  const [error, setError] = useState<{ message: string; status?: string } | undefined>()
-  const router = useRouter()
+    const [isLoading, setIsLoading] = useState(false)
+    const [hasSubmitted, setHasSubmitted] = useState<boolean>()
+    const [error, setError] = useState<{ message: string; status?: string } | undefined>()
+    const router = useRouter()
 
-  const onSubmit = useCallback(
-    (data: FormFieldBlock[]) => {
-      let loadingTimerID: ReturnType<typeof setTimeout>
-      const submitForm = async () => {
-        setError(undefined)
+    const onSubmit = useCallback(
+        (data: FormFieldBlock[]) => {
+            let loadingTimerID: ReturnType<typeof setTimeout>
+            const submitForm = async () => {
+                setError(undefined)
 
-        const dataToSend = Object.entries(data).map(([name, value]) => ({
-          field: name,
-          value,
-        }))
+                const dataToSend = Object.entries(data).map(([name, value]) => ({
+                    field: name,
+                    value,
+                }))
 
-        // delay loading indicator by 1s
-        loadingTimerID = setTimeout(() => {
-          setIsLoading(true)
-        }, 1000)
+                // delay loading indicator by 1s
+                loadingTimerID = setTimeout(() => {
+                    setIsLoading(true)
+                }, 1000)
 
-        try {
-          const req = await fetch(`${getClientSideURL()}/api/form-submissions`, {
-            body: JSON.stringify({
-              form: formID,
-              submissionData: dataToSend,
-            }),
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            method: 'POST',
-          })
+                try {
+                    const req = await fetch(`${getClientSideURL()}/api/form-submissions`, {
+                        body: JSON.stringify({
+                            form: formID,
+                            submissionData: dataToSend,
+                        }),
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        method: 'POST',
+                    })
 
-          const res = await req.json()
+                    const res = await req.json()
 
-          clearTimeout(loadingTimerID)
+                    clearTimeout(loadingTimerID)
 
-          if (req.status >= 400) {
-            setIsLoading(false)
+                    if (req.status >= 400) {
+                        setIsLoading(false)
 
-            setError({
-              message: res.errors?.[0]?.message || 'Internal Server Error',
-              status: res.status,
-            })
+                        setError({
+                            message: res.errors?.[0]?.message || 'Internal Server Error',
+                            status: res.status,
+                        })
 
-            return
-          }
+                        return
+                    }
 
-          setIsLoading(false)
-          setHasSubmitted(true)
+                    setIsLoading(false)
+                    setHasSubmitted(true)
 
-          if (confirmationType === 'redirect' && redirect) {
-            const { url } = redirect
+                    if (confirmationType === 'redirect' && redirect) {
+                        const { url } = redirect
 
-            const redirectUrl = url
+                        const redirectUrl = url
 
-            if (redirectUrl) router.push(redirectUrl)
-          }
-        } catch (err) {
-          console.warn(err)
-          setIsLoading(false)
-          setError({
-            message: 'Something went wrong.',
-          })
-        }
-      }
+                        if (redirectUrl) router.push(redirectUrl)
+                    }
+                } catch (err) {
+                    console.warn(err)
+                    setIsLoading(false)
+                    setError({
+                        message: 'Something went wrong.',
+                    })
+                }
+            }
 
-      void submitForm()
-    },
-    [router, formID, redirect, confirmationType],
-  )
+            void submitForm()
+        },
+        [router, formID, redirect, confirmationType],
+    )
 
-  return (
-    <MainGrid>
-      <div className="col-span-7 relative w-full h-auto">
-        <Media
-          imgClassName="rounded-[5rem] rounded-tl-none w-full h-full object-cover"
-          className="z-10 w-full pl-28 h-full mt-16 pr-16"
-          resource={image}
-          loading="lazy"
-        />
-        <Image
-          src={Rectangle}
-          alt="Rectangle"
-          className="absolute top-0 left-0 z-[-1] object-cover rounded-[5rem] rounded-tl-none h-64"
-        />
-      </div>
-      <div className="lg:max-w-[48rem] col-span-5 col-start-8">
-        {enableIntro && introContent && !hasSubmitted && (
-          <RichText
-            className="mb-8 prose-h3:mt-3 prose-h6:text-secondary lg:mb-12"
-            data={introContent}
-            enableGutter={false}
-          />
-        )}
-        <div className="pb-4 lg:pb-6">
-          <FormProvider {...formMethods}>
-            {!isLoading && hasSubmitted && confirmationType === 'message' && (
-              <RichText data={confirmationMessage} />
-            )}
-            {isLoading && !hasSubmitted && <p>Loading, please wait...</p>}
-            {error && <div>{`${error.status || '500'}: ${error.message || ''}`}</div>}
-            {!hasSubmitted && (
-              <form id={formID} onSubmit={handleSubmit(onSubmit)}>
-                <div className="mb-4 last:mb-0 w-full grid grid-cols-2 justify-center gap-4">
-                  {formFromProps &&
-                    formFromProps.fields &&
-                    formFromProps.fields?.map((field, index) => {
-                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                      const Field: React.FC<any> = fields?.[field.blockType as keyof typeof fields]
-                      if (Field) {
-                        return (
-                          <Field
-                            form={formFromProps}
-                            {...field}
-                            {...formMethods}
-                            control={control}
-                            errors={errors}
-                            register={register}
-                            key={index}
-                          />
-                        )
-                      }
-                      return null
-                    })}
-                </div>
+    return (
+        <MainGrid className="lg:px-6">
+            <div className="col-span-7 lg:col-span-full relative w-full h-auto lg:row-start-2">
+                <Media
+                    imgClassName="rounded-[5rem] rounded-tl-none w-full h-full object-cover"
+                    className="z-10 w-full pl-28 h-full mt-16 pr-16 lg:pr-0"
+                    resource={image}
+                    loading="lazy"
+                />
+                <Image
+                    src={Rectangle}
+                    alt="Rectangle"
+                    className="absolute top-0 left-0 z-[-1] object-cover rounded-[5rem] rounded-tl-none h-64"
+                />
+            </div>
+            <div className="max-w-[48rem] col-span-5 lg:col-span-full col-start-8 lg:col-start-1 lg:row-start-1">
+                {enableIntro && introContent && !hasSubmitted && (
+                    <RichText
+                        className="mb-8 prose-h3:mt-3 prose-h6:text-secondary lg:mb-12"
+                        data={introContent}
+                        enableGutter={false}
+                    />
+                )}
+                <div className="pb-4 lg:pb-6">
+                    <FormProvider {...formMethods}>
+                        {!isLoading && hasSubmitted && confirmationType === 'message' && (
+                            <RichText data={confirmationMessage} />
+                        )}
+                        {isLoading && !hasSubmitted && <p>Loading, please wait...</p>}
+                        {error && <div>{`${error.status || '500'}: ${error.message || ''}`}</div>}
+                        {!hasSubmitted && (
+                            <form id={formID} onSubmit={handleSubmit(onSubmit)}>
+                                <div className="mb-4 last:mb-0 w-full grid grid-cols-2 justify-center gap-4">
+                                    {formFromProps &&
+                                        formFromProps.fields &&
+                                        formFromProps.fields?.map((field, index) => {
+                                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                                            const Field: React.FC<any> =
+                                                fields?.[field.blockType as keyof typeof fields]
+                                            if (Field) {
+                                                return (
+                                                    <Field
+                                                        form={formFromProps}
+                                                        {...field}
+                                                        {...formMethods}
+                                                        control={control}
+                                                        errors={errors}
+                                                        register={register}
+                                                        key={index}
+                                                    />
+                                                )
+                                            }
+                                            return null
+                                        })}
+                                </div>
 
-                <Button
-                  form={formID}
-                  type="submit"
-                  className="bg-secondary text-primary 
+                                <Button
+                                    form={formID}
+                                    type="submit"
+                                    className="bg-secondary text-primary 
                   h-12 hover:bg-transparent border hover:text-secondary w-full hover:border-secondary"
-                  variant="default"
-                >
-                  {submitButtonLabel}
-                </Button>
-              </form>
-            )}
-          </FormProvider>
-        </div>
-      </div>
-    </MainGrid>
-  )
+                                    variant="default"
+                                >
+                                    {submitButtonLabel}
+                                </Button>
+                            </form>
+                        )}
+                    </FormProvider>
+                </div>
+            </div>
+        </MainGrid>
+    )
 }
