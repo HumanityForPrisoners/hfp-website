@@ -13,7 +13,7 @@ export const FeaturedEventsBlock: React.FC<FeaturedEventsBlockProps> = ({
 
     return (
         <Fragment>
-            <MainGrid className="pt-8 pb-24 gap-y-14">
+            <MainGrid className="pt-8 pb-24 gap-y-14 lg:px-6">
                 <h3 className="col-span-12">Upcoming Events</h3>
                 {filteredEvents.map(({ content, title, slug, eventAt }, i) => {
                     const today = new Date()

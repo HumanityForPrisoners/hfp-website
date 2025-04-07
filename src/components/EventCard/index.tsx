@@ -22,7 +22,7 @@ export const EventCard: React.FC<Props> = (props) => {
         timeZoneName: 'short', // Display timezone
     })
     return (
-        <div className="col-span-4">
+        <div className="col-span-4 lg:col-span-full">
             <Link href={`/events/${reference.slug}`}>
                 <Media
                     className="rounded-t-3xl h-80"
