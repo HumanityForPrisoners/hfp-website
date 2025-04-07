@@ -6,15 +6,15 @@ import { FAQCard } from '@/components/FAQCard'
 
 export const FaqBlock: React.FC<FaqBlockType> = ({ pageHeading, leftSide, rightSide }) => {
     return (
-        <MainGrid>
-            <PageHeading className="col-span-6" {...pageHeading} />
-            <div className="col-span-12 flex justify-between items-start">
+        <MainGrid className="lg:px-6">
+            <PageHeading className="col-span-6 lg:col-span-full" {...pageHeading} />
+            <div className="col-span-12 flex lg:flex-col justify-between items-start">
                 <FAQCard
-                    className="bg-primary w-[53%] translate-x-[3%] z-10 rounded-tl-none"
+                    className="bg-primary w-[53%] lg:w-full translate-x-[3%] z-10 lg:z-0 rounded-tl-none"
                     questionBank={leftSide}
                 />
                 <FAQCard
-                    className="bg-primary w-[53%] mt-20 -translate-x-[3%] z-0 rounded-br-none"
+                    className="bg-primary w-[53%] lg:w-full mt-20 lg:-mt-16 -translate-x-[3%] z-0 lg:z-10 rounded-br-none"
                     questionBank={rightSide}
                 />
             </div>
