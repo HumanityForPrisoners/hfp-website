@@ -8,8 +8,8 @@ import { Media } from '@/components/Media'
 export const FullGalleryBlock: React.FC<FullGalleryBlockType> = ({ row, pageHeading }) => {
     let rowContentLength = 0
     return (
-        <MainGrid>
-            <PageHeading className="col-span-6 pb-4" {...pageHeading} />
+        <MainGrid className="lg:px-6">
+            <PageHeading className="col-span-6 lg:col-span-full pb-4" {...pageHeading} />
             {row?.map((row, i) => {
                 rowContentLength = row.rowContent?.length || 0
                 return (
@@ -18,7 +18,9 @@ export const FullGalleryBlock: React.FC<FullGalleryBlockType> = ({ row, pageHead
                             return (
                                 <div
                                     className={clsx(
-                                        rowContentLength === 3 ? 'col-span-4' : 'col-span-3',
+                                        rowContentLength === 3
+                                            ? 'col-span-4 lg:col-span-full'
+                                            : 'col-span-3 lg:col-span-full',
                                         'h-56',
                                     )}
                                     key={j}
