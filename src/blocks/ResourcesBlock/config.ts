@@ -41,6 +41,40 @@ export const ResourcesBlock: Block = {
                 },
             ],
         },
+        {
+            name: 'newsletters',
+            type: 'group',
+            fields: [
+                {
+                    name: 'title',
+                    type: 'text',
+                    required: true,
+                },
+                {
+                    name: 'content',
+                    type: 'array',
+                    required: true,
+                    labels: {
+                        singular: 'Newsletter',
+                        plural: 'Newsletters',
+                    },
+                    fields: [
+                        {
+                            name: 'newsletterLabel',
+                            type: 'text',
+                            required: true,
+                        },
+                        {
+                            name: 'content',
+                            type: 'upload',
+                            relationTo: 'media',
+                            label: 'content',
+                            required: true,
+                        },
+                    ],
+                },
+            ],
+        },
     ],
     interfaceName: 'ResourcesBlock',
 }

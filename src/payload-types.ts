@@ -1345,6 +1345,14 @@ export interface ResourcesBlock {
     }[];
     id?: string | null;
   }[];
+  newsletters: {
+    title: string;
+    content: {
+      newsletterLabel: string;
+      content: string | Media;
+      id?: string | null;
+    }[];
+  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'resourcesBlock';
@@ -2131,6 +2139,18 @@ export interface ResourcesBlockSelect<T extends boolean = true> {
               id?: T;
             };
         id?: T;
+      };
+  newsletters?:
+    | T
+    | {
+        title?: T;
+        content?:
+          | T
+          | {
+              newsletterLabel?: T;
+              content?: T;
+              id?: T;
+            };
       };
   id?: T;
   blockName?: T;
