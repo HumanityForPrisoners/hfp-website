@@ -10,16 +10,16 @@ export type Props = {
 export const EventCard: React.FC<Props> = (props) => {
     const { reference } = props
     const date = new Date(reference.eventAt as string)
-    const formattedDate = date.toLocaleString('en-US', {
-        weekday: 'long', // "Friday"
-        year: 'numeric', // "2025"
-        month: 'long', // "May"
-        day: 'numeric', // "2"
+    const formatter = new Intl.DateTimeFormat('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
         hour: 'numeric',
         minute: 'numeric',
-        second: 'numeric',
-        hour12: true, // 12-hour format
-        timeZoneName: 'short', // Display timezone
+        timeZone: 'America/New_York',
+        timeZoneName: 'short',
+        hour12: true,
     })
     return (
         <div className="col-span-4 lg:col-span-full">
@@ -34,7 +34,7 @@ export const EventCard: React.FC<Props> = (props) => {
                     <div className="flex flex-col gap-3 h-full">
                         <h5 className="text-ring">{reference.title}</h5>
                         <p>{reference.content.shortDescription}</p>
-                        <p>{formattedDate}</p>
+                        <p>{formatter.format(date)}</p>
                         <div className="flex items-end h-full">
                             {reference.content.donorPerfectLink ? (
                                 <Link href={reference.content.donorPerfectLink}>
