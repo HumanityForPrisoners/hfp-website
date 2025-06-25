@@ -866,6 +866,7 @@ export interface GalleryBlock {
       id?: string | null;
     }[];
   };
+  isLastOnPage?: boolean | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'galleryBlock';
@@ -1998,6 +1999,7 @@ export interface GalleryBlockSelect<T extends boolean = true> {
               id?: T;
             };
       };
+  isLastOnPage?: T;
   id?: T;
   blockName?: T;
 }
@@ -2842,6 +2844,10 @@ export interface Footer {
   id: string;
   logo: string | Media;
   description: string;
+  titles?: {
+    quickLinkTitle?: string | null;
+    contactLinkTitle?: string | null;
+  };
   navItems?:
     | {
         link: {
@@ -2982,6 +2988,12 @@ export interface HeaderSelect<T extends boolean = true> {
 export interface FooterSelect<T extends boolean = true> {
   logo?: T;
   description?: T;
+  titles?:
+    | T
+    | {
+        quickLinkTitle?: T;
+        contactLinkTitle?: T;
+      };
   navItems?:
     | T
     | {

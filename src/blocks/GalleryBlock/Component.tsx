@@ -4,8 +4,13 @@ import { MainGrid } from '@/components/MainGrid'
 import clsx from 'clsx'
 import { CMSLink } from '@/components/Link'
 import { Media } from '@/components/Media'
+import { cn } from '@/utilities/ui'
 
-export const GalleryBlock: React.FC<GalleryBlockProps> = ({ leftSide, rightSide }) => {
+export const GalleryBlock: React.FC<GalleryBlockProps> = ({
+    leftSide,
+    rightSide,
+    isLastOnPage,
+}) => {
     const { preHeader, header, description, direction } = leftSide.pageHeading
 
     const unRoundMap = [
@@ -16,7 +21,7 @@ export const GalleryBlock: React.FC<GalleryBlockProps> = ({ leftSide, rightSide 
     ]
 
     return (
-        <MainGrid className="pt-0 pb-0 -mb-[28rem] z-10 lg:px-6">
+        <MainGrid className={cn('pt-0 pb-0 z-10 lg:px-6', isLastOnPage && '-mb-[28rem]')}>
             <div className="col-span-12 bg-primary flex lg:flex-col items-center justify-center p-16 md:px-6 md:py-16 rounded-lg">
                 <div
                     className={clsx(
